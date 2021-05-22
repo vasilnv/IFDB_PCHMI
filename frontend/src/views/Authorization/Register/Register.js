@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 //import { login, signup } from '../../../utils/authFunctions' 
 import userService from '../../../services/userService' 
+
 import RegisterForm from './RegisterForm';
 
 import './Register.scss'
@@ -15,7 +16,7 @@ const Register = (
     };
 
     const handleLogin = async (userData) => {
-        console.log('login');
+        await userService.login(userData);
     }
 
     return (
