@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 //import { login, signup } from '../../../utils/authFunctions' 
-import authService from '../../../services/authService' 
+import userService from '../../../services/userService' 
 import RegisterForm from './RegisterForm';
 
 import './Register.scss'
@@ -11,14 +11,12 @@ const Register = (
     const [isLogin, setIsLogin] = useState(true);
 
     const handleRegister = async (userData) => {
-        console.log('Register');
+        await userService.register(userData);
     };
 
     const handleLogin = async (userData) => {
         console.log('login');
     }
-
-    console.log(5615);
 
     return (
         <div className="register-wrapper">
