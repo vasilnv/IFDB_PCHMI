@@ -6,7 +6,7 @@ const userService = {
     getUserByEmail: userEmail => requester(api.getUserByEmail(userEmail)).get(),
     getUsers: () => requester(api.getFriends()).get(),
     register: async (userData) => await requester(api.registerUser()).create(userData),
-    login: async (userData) => await requester(api.logginUser()).create(userData),
+    login: async (userData) => await requester(api.loginUser()).create(userData),
 }
 
 
