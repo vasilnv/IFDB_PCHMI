@@ -10,8 +10,6 @@ const Home = ({
     //requester(api.getChat('newChat')).get();
   }, [])
 
-  console.log(5615);
-
   const { currentUser } = useAuth();
 
   return (
