@@ -27,9 +27,9 @@ export const AuthProvider = ({
             }
             setLoading(false);
         });*/
-
-        return console.log('Batko');
     }, [])
+
+    console.log('Batko');
 
     const value = {
         currentUser,
@@ -37,7 +37,7 @@ export const AuthProvider = ({
 
     return (
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
     )
 };

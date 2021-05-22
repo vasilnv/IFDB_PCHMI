@@ -18,13 +18,15 @@ const Register = (
         console.log('login');
     }
 
+    console.log(5615);
+
     return (
         <div className="register-wrapper">
             <div className="header-wrapper">
-                <h1 className="register-title"> { isLogin ? "Log In to IFDb" : "Sign Up to IFDb" }</h1>
+                <h1 className="register-title"> { isLogin ? "Влез в IFDb" : "Регистрирай се в IFDb" }</h1>
                 <div className="register-subtitle-wrapper">
-                    <h5 className="register-subtitle"> { isLogin ? "Don't have an account?" : "Already have an account?"}</h5>
-                    <button className="register-login-link-btn" onClick={() => setIsLogin(!isLogin)}>{isLogin ? "Sign Up" : "Log In"}</button>
+                    <h5 className="register-subtitle"> { isLogin ? "Нямаш акаунт?" : "Вече имаш акаунт?"}</h5>
+                    <button className="register-login-link-btn" onClick={() => setIsLogin(!isLogin)}>{isLogin ? "Регистрация" : "Вход"}</button>
                 </div>
             </div>
             <div className="register-form-wrapper">
@@ -38,4 +40,4 @@ const Register = (
     )
 } 
 
-export default Register;
+export default Register

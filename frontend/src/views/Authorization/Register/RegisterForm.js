@@ -13,8 +13,8 @@ const RegisterForm = ({
     loading,
 }) => {
     
-    const validationFields = isLogin ? ['email', 'password'] : ['firstName', 'lastName', 'email', 'password'];
-    const initialValues = { firstName: '', lastName: '', email: '', password: '' };
+    const validationFields = isLogin ? ['username', 'password'] : ['username', 'email', 'password'];
+    const initialValues = { username: '', email: '', password: '' };
 
     return (
         <Formik
