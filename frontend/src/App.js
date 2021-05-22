@@ -4,7 +4,7 @@ import Register from './views/Authorization/Register/Register.js'
 import isGuest from './hoc/isGuest'
 import isAuthenticated from './hoc/isAuthenticated'
 import { AuthProvider } from './contexts/AuthContext'
-import Home from './views/Home/Home.js'
+import Home from './views/Home'
 import Main from './views/Layout/Main.js'
 
 import './App.scss';
