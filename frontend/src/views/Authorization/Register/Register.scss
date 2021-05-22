@@ -5,12 +5,8 @@
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    height: 100%;
-    width: 100%;
-    transform: translate(-50%, -50%);
+    padding-top: 30vh;
+    overflow: none;
     min-height: 100vh;
 
     .register-form-wrapper {
