@@ -12,8 +12,6 @@ import RouteWrapper from "./views/Layout/RouteWrapper.js";
 
 export default function App() {
 
-  console.log(4);
-
   return (
     <Router>
       <div className="App">
