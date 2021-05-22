@@ -58,7 +58,7 @@ const RegisterFormView = ({
                 <ErrorMessage name="password" component="div" className="invalid-field-message" />
             </Form.Group>
             <Button disabled={loading} variant="primary" type="submit" className="register-form-btn">
-                {isLogin ? "Log In" : "Sign Up"}
+                {isLogin ? "Вход" : "Регистрация"}
             </Button>
         </Form>
     )
