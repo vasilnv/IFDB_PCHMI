@@ -13,22 +13,15 @@ const RegisterForm = ({
     loading,
 }) => {
     
-    const validationFields = isLogin ? ['username', 'password'] : ['username', 'email', 'password'];
+    const validationFields = isLogin ? ['username', 'password'] : ['username', 'password'];
     const initialValues = { username: '', email: '', password: '' };
 
     return (
         <Formik
             initialValues={initialValues}
-            validate={values => {
-                return {
-                    ...validateEmail(values, ['email']),
-                    ...validateLength(values, [
-                        { value: "password", minLength: 8, maxLength: 32 }
-                    ]),
-                    ...validateRequestField(values, validationFields),
-                }
-            }}
+
             onSubmit={async (values) => {
+                console.log(54, values, isLogin)
                 isLogin ? handleLogin(values) : handleRegister(values);
             }}
         >

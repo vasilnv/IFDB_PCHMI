@@ -11,25 +11,26 @@ export const useAuth = () => {
 export const AuthProvider = ({
     children
 }) => {
-    const [currentUser, setCurrentUser] = useState(false);
+    const [currentUser, setCurrentUser] = useState({});
     const [loading, setLoading] = useState(true);
 
     //const getUserByEmail = async (user) => setCurrentUser((await userService.getUserByEmail(user.email))[0]);
+    const cookies = document.cookie;
+    const newCookies = document.cookie.split(';');
+    
     
     useEffect(() => {
-        /*const unsubscribe = auth.onIdTokenChanged(async user => {
-            if(user) {
-                if(!user.emailVerified) {
-                    user.sendEmailVerification();
-                } else {
-                    //wait getUserByEmail(user);
-                }
+        let result = {};
+        newCookies.map((x) => {
+            if(x) {
+                const data = x.split('=');
+                result[data[0].trim()] = data[1].trim();
             }
-            setLoading(false);
-        });*/
-    }, [])
+        }, {})
 
-    console.log('Batko');
+        setCurrentUser(result);
+
+    }, [cookies])
 
     const value = {
         currentUser,

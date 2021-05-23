@@ -19,6 +19,8 @@ const Main = ({
 
     const { currentUser } = useAuth();
 
+    console.log(10, currentUser);
+
     return (
         <div className="main-layout-wrapper">
             <Navbar className="navbar" sticky="top">
