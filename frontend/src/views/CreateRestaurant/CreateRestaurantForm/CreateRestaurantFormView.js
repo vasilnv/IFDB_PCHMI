@@ -99,7 +99,7 @@ const CreateRestaurantFormView = ({
                         </div>
                     )}
                 />
-                <ErrorMessage name="password" component="div" className="invalid-field-message" />
+                <ErrorMessage name="foods" component="div" className="invalid-field-message" />
             </Form.Group>
             <Button variant="primary" type="submit" className="register-form-btn">
                 Запазване на промените

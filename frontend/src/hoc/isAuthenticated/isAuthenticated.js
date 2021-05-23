@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useAuth } from '../../contexts/AuthContext';
 
-const isAuthenticated = Component => {
+const isAuthenticated = (Component, userRoles) => {
     const User = () => 
     {
         const history = useHistory();
