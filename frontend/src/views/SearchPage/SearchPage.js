@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 import StarFill from 'assets/star-fill.svg';
 import userService from 'services/userService';
@@ -12,7 +13,7 @@ const SearchPage = ({
     const { search } = useParams();
     const [results, setResult] = useState([]);
 
-    const getRestaurants = async () => {return await userService.getRestaurants()};
+    let history = useHistory();
 
     useState(() => {
         userService.getRestaurants().then(x => setResult(x));
@@ -40,7 +41,7 @@ const SearchPage = ({
                     filterOutput(results).map((x, index) => {
 
                         return (
-                            <div key={x.id} className="restaurant-wrapper" onClick={() => alert(x.name)}>
+                            <div key={x.id} className="restaurant-wrapper" onClick={() => history.push(`/restaurant/${x.name}`)}>
                                 <div>
                                     {x.name}
                                 </div>
