@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { useHistory } from 'react-router';
 //import { login, signup } from '../../../utils/authFunctions' 
 import userService from '../../../services/userService' 
 
@@ -10,19 +10,22 @@ import './Register.scss'
 const Register = (
 ) => {
     const [isLogin, setIsLogin] = useState(true);
+    let history = useHistory();
 
     const handleRegister = async (userData) => {
         userService.register(userData);
+        setIsLogin(true);
     };
 
     const handleLogin = async (userData) => {
         try {
-            const newUserData = await userService.login(userData.username, userData.password);
+            const newUserData = userService.login(userData.username, userData.password);
             document.cookie = `username=${newUserData.username}`;
             document.cookie = `email=${newUserData.email}`;
             document.cookie = `_id=${newUserData.id}`;
             document.cookie = `isBlocked=${newUserData.isBlocked}`;
             document.cookie = `role=${newUserData.userType}`;
+            history.push("/")
         } catch (err) {
             console.log(err);
         }
