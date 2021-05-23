@@ -1,5 +1,6 @@
 package com.example.IFdb.model.dto.user;
 
+import com.example.IFdb.model.entity.Restaurant;
 import com.example.IFdb.model.enums.UserType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 @Setter
@@ -43,5 +45,7 @@ public class UserDto {
     @Column
     @NotNull
     private boolean isBlocked;
+
+    private List<Restaurant> restaurantList;
 
 }

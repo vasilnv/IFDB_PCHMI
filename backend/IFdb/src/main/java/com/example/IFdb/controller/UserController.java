@@ -50,7 +50,9 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<UserDto> loginUser(@Valid @RequestBody LoginUserDto loginUserDto){
+    public ResponseEntity<UserDto> loginUser(@RequestParam(value = "username") String username,
+                                             @RequestParam(value = "password") String password){
+        LoginUserDto loginUserDto = new LoginUserDto(username,password);
         User newUser = this.userService.loginUser(loginUserDto);
         return new ResponseEntity<>(this.modelMapper.map(newUser,UserDto.class), HttpStatus.OK);
     }
