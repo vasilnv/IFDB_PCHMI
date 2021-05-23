@@ -7,7 +7,7 @@ const userService = {
     getUsers: () => requester(api.getFriends()).get(),
     createRestaurant: (userId, data) => requester(api.restaurant(userId)).uploadFile(data),
     register: async (userData) => await requester(api.registerUser()).create(userData),
-    login: async (userData) => await requester(api.loginUser()).create(userData),
+    login: async (username, password) => await requester(api.loginUser(username, password)).get(),
     blockAccounts: async (userId, data) => await requester(api.blockAccounts()).update(data),
 }
 
