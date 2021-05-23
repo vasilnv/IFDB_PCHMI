@@ -14,7 +14,6 @@ const SearchPage = ({
     const [results, setResult] = useState([]);
 
     let history = useHistory();
-
     useState(() => {
         userService.getRestaurants().then(x => setResult(x));
     }, [search])
