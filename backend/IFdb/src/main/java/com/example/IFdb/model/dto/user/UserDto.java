@@ -31,10 +31,6 @@ public class UserDto {
 
     @NotNull
     @Column
-    private String password;
-
-    @NotNull
-    @Column
     private String email;
 
     @NotNull
