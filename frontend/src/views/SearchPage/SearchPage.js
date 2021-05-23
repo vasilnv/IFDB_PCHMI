@@ -6,8 +6,6 @@ import userService from 'services/userService';
 
 import './SearchPage.scss';
 
-const restaurants = [{ name: 'Batkoviq', stars: 4 }, { name: 'Putkava Torta', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Dedoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 },];
-
 const SearchPage = ({
 
 }) => {
@@ -20,8 +18,15 @@ const SearchPage = ({
         userService.getRestaurants().then(x => setResult(x));
     }, [search])
 
-    const filterOutput = () => {
-        
+    const filterOutput = (data) => {
+        const result = data.filter(x => {
+            const isWithThisName = x.name === search;
+            const haveFood = x.foods.includes(search);
+
+            return isWithThisName || haveFood;
+        })
+
+        return result;
     };
 
     return (
@@ -32,13 +37,7 @@ const SearchPage = ({
             </div>
             <div className="content-wrapper">
                 {
-                    results.map((x, index) => {
-
-                        console.log(x);
-                        return (
-                            <div>
-                            </div>
-                        )
+                    filterOutput(results).map((x, index) => {
 
                         return (
                             <div key={index} className="restaurant-wrapper" onClick={() => alert(x.name)}>
@@ -47,7 +46,7 @@ const SearchPage = ({
                                 </div>
                                 <div>
                                     {
-                                        Array.from(Array(x.stars).keys()).map(x => {
+                                        Array.from(Array(4).keys()).map(x => {
                                             return <img src={StarFill} alt="restaurant" />
                                         })
                                     }
