@@ -9,15 +9,12 @@ const urlBuilder = (...paths) => {
 }
 
 const initRequest = async (contentType, method, body) => {
-    console.log(contentType)
-
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", contentType);
-    myHeaders.append("Access-Control-Allow-Origin", "https://localhost:3000");
     return {
         method,
         credentials: 'include',
-        headers: myHeaders,
+        headers: {
+            ...(contentType && { 'Content-Type': contentType }),
+        },
         body
     }
 };
