@@ -13,7 +13,7 @@
 
 export const validateEmail = (values, fields) => {
     const errors = fields.reduce((errors, field) => {
-        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values[field])) {
+        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values[field]) && values[field] !== "") {
             errors[field] = 'Invalid email address!';
           }
         return errors

@@ -56,5 +56,51 @@
                 margin-bottom: 5px;
             }
         }
+
+        .food-wrapper {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+
+            .title {
+                color: $grey-dark;
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+            .food {
+                padding: 3px 5px;
+                background-color: $grey-background;
+                color: $grey-lighter;
+            }
+        }
+
+        .comment-section {
+            margin-top: 20px;
+
+            .title {
+                color: $grey-dark;
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+            .content {
+                margin-top: 10px;
+                display: grid;
+                overflow: hidden;
+                grid-template-columns: repeat(6, 1fr);
+                grid-auto-rows: 1fr;
+                grid-column-gap: 10px;
+                grid-row-gap: 10px;
+
+                .comment {
+                    max-width: 350px;
+                    padding: 3px 5px;
+                    background-color: $grey-background;
+                    color: $grey-lighter;
+                    margin-bottom: 10px;
+                }
+            }
+        }
     }
 }

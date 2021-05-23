@@ -5,6 +5,7 @@ import RestaurantImg from 'assets/restaurant.jpg';
 import { restaurant } from './RestaurantPageConstants';
 
 import './RestaurantPage.scss';
+import { Button } from 'react-bootstrap';
 
 const RestaurantPage = ({
 
@@ -76,6 +77,41 @@ const RestaurantPage = ({
                                 })
                             }
                         </div>
+                    </div>
+                </div>
+                <div className="food-wrapper">
+                    <div className="title">
+                        Предлагани храни:
+                    </div>
+                    {
+                        restaurant.foods.map(x => {
+                            return (
+                                <div className="food">
+                                    {x}
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <div className="comment-section">
+                    <div className="title">
+                        Коментари
+                    </div>
+                    <div className="content">
+                        {
+                            restaurant.comments.map(x => {
+                                return (
+                                    <div className="comment-wrapper">
+                                        <div className="comment">
+                                            {x}
+                                        </div>
+                                        <Button >
+                                            Блокиране
+                                        </Button>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>
