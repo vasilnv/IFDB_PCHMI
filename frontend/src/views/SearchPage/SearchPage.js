@@ -18,7 +18,7 @@ const SearchPage = ({
 
     useState(() => {
         userService.getRestaurants().then(x => setResult(x));
-    }, [])
+    }, [search])
 
     const filterOutput = () => {
         
