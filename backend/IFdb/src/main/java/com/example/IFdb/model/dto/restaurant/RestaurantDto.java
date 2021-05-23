@@ -1,6 +1,6 @@
-package com.example.IFdb.model.dto;
+package com.example.IFdb.model.dto.restaurant;
 
-import com.example.IFdb.model.enums.UserType;
+import com.example.IFdb.model.enums.RatingType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,12 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-
+import java.util.List;
 
 @Setter
 @Getter
 @NoArgsConstructor
-public class UserDto {
+public class RestaurantDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,23 +25,26 @@ public class UserDto {
 
     @NotNull
     @Column
-    private String username;
+    private byte[] buffer;
 
     @NotNull
     @Column
-    private String password;
+    private String name;
 
     @NotNull
     @Column
-    private String email;
+    private String description;
 
     @NotNull
     @Column
     @Enumerated(EnumType.STRING)
-    private UserType userType;
+    private RatingType rating;
 
-    @Column
     @NotNull
-    private boolean isBlocked;
+    @Column
+    private List<String> comments;
 
+    @NotNull
+    @Column
+    private List<String> foods;
 }
