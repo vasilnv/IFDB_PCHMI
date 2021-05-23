@@ -1,5 +1,6 @@
 package com.example.IFdb.controller;
 
+import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.dto.restaurant.RestaurantDto;
 import com.example.IFdb.model.dto.user.UserDto;
 import com.example.IFdb.model.entity.Restaurant;
@@ -35,9 +36,9 @@ public class RestaurantController {
     }
 
     @PostMapping("/{userId}")
-    public ResponseEntity<RestaurantDto> createRestaurantPage(@PathVariable(value = "id") Integer userId,
-                                                              @RequestBody @Valid RestaurantDto restaurantDto){
-        Restaurant newRestaurant = this.restaurantService.createRestaurantPage(userId,restaurantDto);
+    public ResponseEntity<RestaurantDto> createRestaurantPage(@PathVariable(value = "userId") Integer userId,
+                                                              @RequestBody @Valid CreateRestaurantDto createRestaurantDto){
+        Restaurant newRestaurant = this.restaurantService.createRestaurantPage(userId,createRestaurantDto);
         return new ResponseEntity<>(this.modelMapper.map(newRestaurant,RestaurantDto.class), HttpStatus.CREATED);
     }
 

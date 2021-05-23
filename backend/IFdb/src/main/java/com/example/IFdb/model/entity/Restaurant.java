@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.xml.stream.events.Comment;
 import java.util.List;
 
 
@@ -26,7 +27,6 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
     @Column
     private byte[] buffer;
 
@@ -36,19 +36,23 @@ public class Restaurant {
 
     @NotNull
     @Column
-    private String description;
+    private String address;
+
 
     @NotNull
+    @Column
+    private String description;
+
     @Column
     @Enumerated(EnumType.STRING)
     private RatingType rating;
 
-    @NotNull
+
     @Column
-    private List<String> comments;
+    private String[] comments;
 
     @NotNull
     @Column
-    private List<String> foods;
+    private String[] foods;
 
 }

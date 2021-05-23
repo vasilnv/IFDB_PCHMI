@@ -1,11 +1,10 @@
 package com.example.IFdb.service;
 
-import com.example.IFdb.model.dto.restaurant.RestaurantDto;
+import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.entity.Restaurant;
-import org.springframework.data.domain.Page;
 
 public interface RestaurantService {
 
-    Restaurant createRestaurantPage(Integer userId,RestaurantDto restaurantDto);
+    Restaurant createRestaurantPage(Integer userId, CreateRestaurantDto createRestaurantDto);
 //    Page<Restaurant> getAllRestaurants(String searchCriteria);
 }
