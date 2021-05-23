@@ -1,6 +1,7 @@
 package com.example.IFdb.model.dto.restaurant;
 
 import com.example.IFdb.model.entity.Comment;
+import com.example.IFdb.model.entity.Rating;
 import com.example.IFdb.model.enums.RatingType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,12 +48,7 @@ public class RestaurantDto {
     @Column
     private String description;
 
-    @NotNull
-    @Column
-    @Enumerated(EnumType.STRING)
-    private RatingType rating;
-
-    private List<Comment> commentList;
+//    private List<Comment> commentList;
 
     @NotNull
     @Column
