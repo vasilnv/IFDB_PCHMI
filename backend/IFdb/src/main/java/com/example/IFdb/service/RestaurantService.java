@@ -1,11 +1,14 @@
 package com.example.IFdb.service;
 
-import com.example.IFdb.model.dto.restaurant.RestaurantDto;
+import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.entity.Restaurant;
-import org.springframework.data.domain.Page;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 public interface RestaurantService {
 
-    Restaurant createRestaurantPage(Integer userId,RestaurantDto restaurantDto);
+    Restaurant createRestaurantPage(Integer userId, MultipartFile multipartFile, CreateRestaurantDto createRestaurantDto) throws IOException, SQLException;
 //    Page<Restaurant> getAllRestaurants(String searchCriteria);
 }
