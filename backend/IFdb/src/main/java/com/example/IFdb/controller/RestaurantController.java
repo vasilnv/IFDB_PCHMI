@@ -62,7 +62,7 @@ public class RestaurantController {
     @PutMapping("/rate")
     public ResponseEntity addRestaurantRating(@Valid @RequestBody RatingDto ratingDto){
 
-        this.restaurantService.addRestaurantRating(ratingDto);
+//        this.restaurantService.addRestaurantRating(ratingDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
