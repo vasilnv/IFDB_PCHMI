@@ -9,6 +9,7 @@ import CreateRestaurant from './views/CreateRestaurant'
 import AccountBlock from './views/AccountBlock'
 import MyAccount from './views/MyAccount'
 import RestaurantPage from './views/RestaurantPage'
+import SearchPage from './views/SearchPage';
 import Main from './views/Layout/Main.js'
 
 import './App.scss';
@@ -26,6 +27,7 @@ export default function App() {
             <RouteWrapper path="/block" component={AccountBlock} layout={Main}/>
             <RouteWrapper path="/my-account" component={MyAccount} layout={Main}/>
             <RouteWrapper path="/restaurant/:restaurantId" component={RestaurantPage} layout={Main}/>
+            <RouteWrapper path="/search/:search" component={SearchPage} layout={Main}/>
             <Route path="/authorization" component={isGuest(Register)} />
           </Switch>
         </AuthProvider>
