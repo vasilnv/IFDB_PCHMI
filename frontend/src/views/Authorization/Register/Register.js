@@ -16,7 +16,8 @@ const Register = (
     };
 
     const handleLogin = async (userData) => {
-        await userService.login(userData.username, userData.password);
+        const prop = await userService.login(userData.username, userData.password);
+        console.log(prop)
     }
 
     return (
