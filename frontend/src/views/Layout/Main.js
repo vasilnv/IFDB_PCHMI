@@ -13,13 +13,23 @@ const Main = ({
     children,
 }) => {
 
+    let history = useHistory();
+
     /*<Button className="main-layout-settings-btn" onClick={logout}>
         <GearFill />
     </Button>*/
 
     const { currentUser } = useAuth();
 
-    console.log(10, currentUser);
+    const newCookies = document.cookie.split(';');
+
+    let result = {};
+    newCookies.map((x) => {
+        if(x) {
+            const data = x.split('=');
+            result[data[0].trim()] = data[1].trim();
+        }
+    }, {})
 
     return (
         <div className="main-layout-wrapper">
@@ -33,10 +43,15 @@ const Main = ({
                     </Form>
                 </Navbar.Collapse>
                 <Nav className="mr-auto">
-                    {currentUser ?
+                    {result._id ?
+                        <div className="profile">
                         <Nav.Item>
                             <Nav.Link href="/my-account">Моят Профил</Nav.Link>
                         </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => {document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); }); history.push("/authorization");}}>Izhod</Nav.Link>
+                        </Nav.Item>
+                        </div>
                         :
                         <Nav.Item>
                             <Nav.Link href="/authorization">Вход</Nav.Link>

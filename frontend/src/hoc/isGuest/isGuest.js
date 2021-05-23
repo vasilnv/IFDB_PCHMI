@@ -9,14 +9,24 @@ const isGuest = Component => {
         const history = useHistory();
         const { currentUser } = useAuth();
 
+        const newCookies = document.cookie.split(';');
+
+        let result = {};
+        newCookies.map((x) => {
+            if(x) {
+                const data = x.split('=');
+                result[data[0].trim()] = data[1].trim();
+            }
+        }, {})
+
         useEffect(() => {
-            if(currentUser._id) {
+            if(result._id) {
                 history.push('/')
             }
         });
         return (
             <> 
-                { !currentUser._id ? <Component /> : null}
+                { !result._id ? <Component /> : null}
             </>
         )
     }
