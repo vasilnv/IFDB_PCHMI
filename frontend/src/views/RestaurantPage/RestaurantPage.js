@@ -17,8 +17,8 @@ const RestaurantPage = ({
                 <div className="left-part">
                     <h1 className="header-title"> {restaurant.name} </h1>
                     {
-                        Array.from(Array(restaurant.rate).keys()).map(x => {
-                            return <img src={StarFill} alt="rate" />
+                        Array.from(Array(restaurant.rate).keys()).map((x, index) => {
+                            return <img key={index} src={StarFill} alt="rate" />
                         })
                     }
                 </div>
@@ -58,22 +58,22 @@ const RestaurantPage = ({
                     <div className="content-rate-col content">
                         <div className="content-rate-content">
                             {
-                                Array.from(Array(restaurant.atmosphere).keys()).map(x => {
-                                    return <img src={StarFill} alt="rate" />
+                                Array.from(Array(restaurant.atmosphere).keys()).map((x, index) => {
+                                    return <img key={index} src={StarFill} alt="rate" />
                                 })
                             }
                         </div>
                         <div className="content-rate-content">
                             {
-                                Array.from(Array(restaurant.serve).keys()).map(x => {
-                                    return <img src={StarFill} alt="rate" />
+                                Array.from(Array(restaurant.serve).keys()).map((x, index) => {
+                                    return <img key={index} src={StarFill} alt="rate" />
                                 })
                             }
                         </div>
                         <div className="content-rate-content">
                             {
-                                Array.from(Array(restaurant.quality).keys()).map(x => {
-                                    return <img src={StarFill} alt="rate" />
+                                Array.from(Array(restaurant.quality).keys()).map((x, index) => {
+                                    return <img key={index} src={StarFill} alt="rate" />
                                 })
                             }
                         </div>

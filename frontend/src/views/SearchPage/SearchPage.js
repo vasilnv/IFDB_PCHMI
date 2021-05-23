@@ -41,7 +41,7 @@ const SearchPage = ({
                     filterOutput(results).map((x, index) => {
 
                         return (
-                            <div key={x.id} className="restaurant-wrapper" onClick={() => history.push(`/restaurant/${x.name}`)}>
+                            <div key={x.id} className="restaurant-wrapper" onClick={() => history.push(`/restaurant/${x.id}`)}>
                                 <div>
                                     {x.name}
                                 </div>
