@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import StarFill from 'assets/star-fill.svg';
+import userService from 'services/userService';
 
 import './SearchPage.scss';
 
@@ -13,8 +14,14 @@ const SearchPage = ({
     const { search } = useParams();
     const [results, setResult] = useState([]);
 
-    const filterOutput = () => {
+    const getRestaurants = async () => {return await userService.getRestaurants()};
 
+    useState(() => {
+        userService.getRestaurants().then(x => setResult(x));
+    }, [])
+
+    const filterOutput = () => {
+        
     };
 
     return (
@@ -25,7 +32,14 @@ const SearchPage = ({
             </div>
             <div className="content-wrapper">
                 {
-                    restaurants.map((x, index) => {
+                    results.map((x, index) => {
+
+                        console.log(x);
+                        return (
+                            <div>
+                            </div>
+                        )
+
                         return (
                             <div key={index} className="restaurant-wrapper" onClick={() => alert(x.name)}>
                                 <div>
