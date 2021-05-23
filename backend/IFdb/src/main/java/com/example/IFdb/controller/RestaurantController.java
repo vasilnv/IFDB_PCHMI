@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 @Validated
@@ -51,12 +52,11 @@ public class RestaurantController {
         return new ResponseEntity<>(this.modelMapper.map(newRestaurant,RestaurantDto.class),HttpStatus.CREATED);
     }
 
-//    @GetMapping("/{searchCriteria}")
-//    public ResponseEntity<List<RestaurantDto>> findRestaurants(@PathVariable(value = "searchCriteria") String searchCriteria){
-//
-//        Page<Restaurant> restaurants = this.restaurantService.getAllRestaurants(searchCriteria);
-//        Page<RestaurantDto> dtoPage = restaurants.map(restaurant -> modelMapper.map(restaurant, RestaurantDto.class));
-//        List<RestaurantDto> restaurantsDto = dtoPage.getContent();
-//        return new ResponseEntity<>(restaurantsDto, HttpStatus.OK);
-//    }
+    @GetMapping
+    public ResponseEntity<List<RestaurantDto>> findRestaurants(){
+
+        List<Restaurant> restaurants = this.restaurantService.getAllRestaurants();
+        List<RestaurantDto> restaurantsDto = Arrays.asList(modelMapper.map(restaurants, RestaurantDto[].class));
+        return new ResponseEntity<>(restaurantsDto, HttpStatus.OK);
+    }
 }

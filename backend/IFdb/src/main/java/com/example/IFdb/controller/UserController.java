@@ -3,6 +3,7 @@ package com.example.IFdb.controller;
 
 import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.dto.restaurant.RestaurantDto;
+import com.example.IFdb.model.dto.user.ChangeCredentialsDto;
 import com.example.IFdb.model.dto.user.LoginUserDto;
 import com.example.IFdb.model.dto.user.RegisterUserDto;
 import com.example.IFdb.model.dto.user.UserDto;
@@ -17,8 +18,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -57,19 +61,16 @@ public class UserController {
         return new ResponseEntity<>(this.modelMapper.map(newUser,UserDto.class), HttpStatus.OK);
     }
 
-//    @PostMapping("/{userId}")
-//    public ResponseEntity<UserOnlyRestaurantDto> createRestaurantPage(@PathVariable(value = "userId") Integer userId,
-//                                                              @RequestParam(value = "attachedfile") MultipartFile multipartFile,
-//                                                              @RequestParam(value = "name") String name,
-//                                                              @RequestParam(value = "address") String address,
-//                                                              @RequestParam(value = "description") String description,
-//                                                              @RequestParam(value = "foods") String[] foods) throws IOException, SQLException {
-//
-//        CreateRestaurantDto createRestaurantDto = new CreateRestaurantDto(name,address,description,foods);
-//        User newUser = this.userService.createRestaurantPage(userId,multipartFile,createRestaurantDto);
-//        return new ResponseEntity<>(this.modelMapper.map(newUser, UserOnlyRestaurantDto.class),HttpStatus.CREATED);
-//    }
+    @PutMapping("/changeCredentials")
+    public ResponseEntity<UserDto> changeUserCredentials(@Valid @RequestBody ChangeCredentialsDto changeCredentialsDto){
+        User newUser = this.userService.changeCredentials(changeCredentialsDto);
+        return new ResponseEntity<>(this.modelMapper.map(newUser,UserDto.class), HttpStatus.OK);
+    }
 
-
+    @PatchMapping("/block")
+    public ResponseEntity blockUsers(@Valid @RequestBody List<String> userIds){
+        this.userService.blockUsers(userIds);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }

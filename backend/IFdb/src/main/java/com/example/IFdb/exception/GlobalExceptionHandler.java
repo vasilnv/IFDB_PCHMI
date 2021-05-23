@@ -28,13 +28,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Object> userNotFoundExcepton(UserNotFoundException userNotFoundException){
+    public ResponseEntity<Object> userNotFoundException(UserNotFoundException userNotFoundException){
         return new ResponseEntity<>(userNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(RestaurantNotFoundException.class)
-    public ResponseEntity<Object> restaurantNotFoundExcepton(RestaurantNotFoundException restaurantNotFoundException){
+    public ResponseEntity<Object> restaurantNotFoundException(RestaurantNotFoundException restaurantNotFoundException){
         return new ResponseEntity<>(restaurantNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UserAlreadyBlockedException.class)
+    public ResponseEntity<Object> userAlreadyBlockedException(UserAlreadyBlockedException userAlreadyBlockedException){
+        return new ResponseEntity<>(userAlreadyBlockedException.getMessage(), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(SQLException.class)
