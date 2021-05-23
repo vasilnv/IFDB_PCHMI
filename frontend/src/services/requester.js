@@ -9,15 +9,12 @@ const urlBuilder = (...paths) => {
 }
 
 const initRequest = async (contentType, method, body) => {
-    console.log(contentType)
-
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", contentType);
-    myHeaders.append("Access-Control-Allow-Origin", "https://localhost:3000");
     return {
         method,
         credentials: 'include',
-        headers: myHeaders,
+        headers: {
+            ...(contentType && { 'Content-Type': contentType }),
+        },
         body
     }
 };
@@ -25,6 +22,8 @@ const initRequest = async (contentType, method, body) => {
 const initBaseRequest = initRequest.bind(null, "application/json");
 
 const responseHandler = async res => {
+
+    console.log(res);
     if (!res.ok) {
         if (res.status === 401) {
             let response = await res.json();

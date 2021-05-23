@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -37,9 +38,13 @@ public class RestaurantController {
 
     @PostMapping("/{userId}")
     public ResponseEntity<RestaurantDto> createRestaurantPage(@PathVariable(value = "userId") Integer userId,
+                                                              @RequestParam(value = "attachedfile") MultipartFile multipartFile,
                                                               @RequestBody @Valid CreateRestaurantDto createRestaurantDto){
-        Restaurant newRestaurant = this.restaurantService.createRestaurantPage(userId,createRestaurantDto);
-        return new ResponseEntity<>(this.modelMapper.map(newRestaurant,RestaurantDto.class), HttpStatus.CREATED);
+
+//        Restaurant newRestaurant = this.restaurantService.createRestaurantPage(userId,createRestaurantDto);
+        //this.modelMapper.map(newRestaurant,RestaurantDto.class)
+        System.out.println("name");
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 //    @GetMapping("/{searchCriteria}")
