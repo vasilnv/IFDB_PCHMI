@@ -40,14 +40,14 @@ const SearchPage = ({
                     filterOutput(results).map((x, index) => {
 
                         return (
-                            <div key={index} className="restaurant-wrapper" onClick={() => alert(x.name)}>
+                            <div key={x.id} className="restaurant-wrapper" onClick={() => alert(x.name)}>
                                 <div>
                                     {x.name}
                                 </div>
                                 <div>
                                     {
-                                        Array.from(Array(4).keys()).map(x => {
-                                            return <img src={StarFill} alt="restaurant" />
+                                        Array.from(Array(4).keys()).map((x, innerIndex) => {
+                                            return <img key={innerIndex} src={StarFill} alt="restaurant" />
                                         })
                                     }
                                 </div>
