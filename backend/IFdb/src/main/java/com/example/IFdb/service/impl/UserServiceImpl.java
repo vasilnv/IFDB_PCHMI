@@ -2,7 +2,9 @@ package com.example.IFdb.service.impl;
 
 import com.example.IFdb.exception.UserAlreadyBlockedException;
 import com.example.IFdb.exception.UserNotFoundException;
+import com.example.IFdb.model.dto.user.BlockUserDto;
 import com.example.IFdb.model.dto.user.ChangeCredentialsDto;
+import com.example.IFdb.model.dto.user.DeleteUserDto;
 import com.example.IFdb.model.dto.user.LoginUserDto;
 import com.example.IFdb.model.dto.user.RegisterUserDto;
 import com.example.IFdb.model.dto.user.UserDto;
@@ -64,15 +66,22 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.save(user);
     }
 
-    public void blockUsers(List<String> userIds){
-//        for(String id : userIds){
-//            User user = getUserById(id);
-//            if(user.isBlocked()){
-//                throw new UserAlreadyBlockedException("This user with id: " + id + " is already blocked!");
-//            }
-//            user.setBlocked(true);
-//            this.userRepository.save(user);
-//        }
+    @Override
+    public void blockUsers(BlockUserDto blockUserDto){
+        for(Integer id : blockUserDto.getUserIds()){
+            User user = getUserById(id);
+            if(user.isBlocked()){
+                throw new UserAlreadyBlockedException("This user with id: " + id + " is already blocked!");
+            }
+            user.setBlocked(true);
+            this.userRepository.save(user);
+        }
+    }
+
+    @Override
+    public void deleteUser(DeleteUserDto deleteUserDto){
+        User user = getUserById(deleteUserDto.getId());
+        this.userRepository.delete(user);
     }
 
 

@@ -19,7 +19,7 @@ const isAuthenticated = (Component, userRoles) => {
         }, {})
 
         useEffect(() => {
-            if(!result._id && !userRoles.includes(result?.role)) {
+            if(!result._id || !userRoles.includes(result?.role)) {
                 history.push('/authorization')
             }
         });

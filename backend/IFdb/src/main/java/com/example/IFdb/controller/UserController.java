@@ -3,7 +3,9 @@ package com.example.IFdb.controller;
 
 import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.dto.restaurant.RestaurantDto;
+import com.example.IFdb.model.dto.user.BlockUserDto;
 import com.example.IFdb.model.dto.user.ChangeCredentialsDto;
+import com.example.IFdb.model.dto.user.DeleteUserDto;
 import com.example.IFdb.model.dto.user.LoginUserDto;
 import com.example.IFdb.model.dto.user.RegisterUserDto;
 import com.example.IFdb.model.dto.user.UserDto;
@@ -17,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,8 +71,14 @@ public class UserController {
     }
 
     @PatchMapping("/block")
-    public ResponseEntity blockUsers(@Valid @RequestBody List<String> userIds){
-        this.userService.blockUsers(userIds);
+    public ResponseEntity blockUsers(@Valid @RequestBody BlockUserDto blockUserDto){
+        this.userService.blockUsers(blockUserDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity deleteUser(@Valid @RequestBody DeleteUserDto deleteUserDto){
+        this.userService.deleteUser(deleteUserDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
