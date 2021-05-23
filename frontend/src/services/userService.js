@@ -9,6 +9,7 @@ const userService = {
     register: async (userData) => await requester(api.registerUser()).create(userData),
     login: async (username, password) => await requester(api.loginUser(username, password)).get(),
     blockAccounts: async (userId, data) => await requester(api.blockAccounts()).update(data),
+    getRestaurants: async () => await requester(api.restaurant()).get(),
 }
 
 
