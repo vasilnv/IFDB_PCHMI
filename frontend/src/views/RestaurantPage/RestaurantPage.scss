@@ -1,0 +1,60 @@
+@import "style.scss";
+
+.restaurant-page-wrapper {
+    padding: 40px 60px;
+
+    .restaurant-page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .right-part {
+            img {
+                width: 250px;
+            }
+        }
+    }
+
+    .restaurant-page-content {
+        margin-top: 30px;
+        .content-address-title {
+            color: $grey-dark;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .content-address-content {
+            color: $grey-lighter;
+        }
+
+        .content-address {
+            display: flex;
+            gap: 20px;
+        }
+
+        .content-description {
+            margin-top: 20px;
+            .content-address-content {
+                margin-top: 5px;
+                max-width: 60vw;
+            }
+        }
+
+        .content-rate {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+
+            .content-rate-title {
+                color: $grey-dark;
+                font-size: 16px;
+                font-weight: 500;
+                margin-bottom: 5px;
+            }
+
+            .content-rate-content {
+                margin-bottom: 5px;
+            }
+        }
+    }
+}

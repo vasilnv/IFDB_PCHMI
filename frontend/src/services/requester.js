@@ -45,6 +45,7 @@ const responseHandler = async res => {
 const requester = (endpoint) => ({
     get: () => initBaseRequest('GET').then(options => fetch(urlBuilder(HOST, endpoint), options)).then(responseHandler),
     create: data => initBaseRequest('POST', JSON.stringify(data)).then(options => fetch(urlBuilder(HOST, endpoint), options)).then(responseHandler),
+    uploadFile: data => initRequest(null, 'POST', data).then(options => fetch(urlBuilder(HOST, endpoint), options)).then(responseHandler),
     update: data => initBaseRequest('PUT', JSON.stringify(data)).then(options => fetch(urlBuilder(HOST, endpoint), options)).then(responseHandler),
     delete: () => initBaseRequest('DELETE').then(options => fetch(urlBuilder(HOST, endpoint), options)).then(responseHandler),
 })
