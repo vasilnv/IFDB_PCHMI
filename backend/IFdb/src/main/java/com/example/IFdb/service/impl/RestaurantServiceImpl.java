@@ -15,6 +15,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.yaml.snakeyaml.util.ArrayUtils;
 
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
@@ -43,14 +44,23 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = new Restaurant();
         restaurant.setAddress(createRestaurantDto.getAddress());
         restaurant.setName(createRestaurantDto.getName());
-        Blob blob = new SerialBlob(multipartFile.getBytes());
-        restaurant.setBuffer(blob);
+        Byte[] bytes = toObjects(multipartFile.getBytes());
+        restaurant.setBuffer(bytes);
         restaurant.setDescription(createRestaurantDto.getDescription());
         restaurant.setFoods(createRestaurantDto.getFoods());
         user.getRestaurantList().add(restaurant);
         user.setRestaurantList(user.getRestaurantList());
 
         return this.restaurantRepository.save(restaurant);
+    }
+
+    private Byte[] toObjects(byte[] bytesPrim) {
+
+        Byte[] bytes = new Byte[bytesPrim.length];
+        int i = 0;
+        for (byte b : bytesPrim) bytes[i++] = b; //Autoboxing
+        return bytes;
+
     }
 
 //    @Override
