@@ -10,13 +10,13 @@ const isGuest = Component => {
         const { currentUser } = useAuth();
 
         useEffect(() => {
-            if(currentUser) {
+            if(currentUser._id) {
                 history.push('/')
             }
         });
         return (
             <> 
-                { !currentUser ? <Component /> : null}
+                { !currentUser._id ? <Component /> : null}
             </>
         )
     }

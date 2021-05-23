@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 
 //import { login, signup } from '../../../utils/authFunctions' 
 import userService from '../../../services/userService' 
@@ -10,15 +11,20 @@ import './Register.scss'
 const Register = (
 ) => {
     const [isLogin, setIsLogin] = useState(true);
+    const [cookies, setCookie] = useCookies(['user']);
 
     const handleRegister = async (userData) => {
-        await userService.register(userData);
+        userService.register(userData);
     };
 
     const handleLogin = async (userData) => {
-        const prop = await userService.login(userData.username, userData.password);
-        console.log(prop)
-    }
+        const newUserData = userService.login(userData.username, userData.password);
+        document.cookie = `username=JohnDoe`;
+        document.cookie = `email=batko`;
+        document.cookie = `_id=54`;
+        document.cookie = `isBlocked=true`;
+        document.cookie = `role=ADMIN`;
+    };
 
     return (
         <div className="register-wrapper">
