@@ -6,9 +6,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface RestaurantService {
 
     Restaurant createRestaurantPage(Integer userId, MultipartFile multipartFile, CreateRestaurantDto createRestaurantDto) throws IOException, SQLException;
-//    Page<Restaurant> getAllRestaurants(String searchCriteria);
+
+    List<Restaurant> getAllRestaurants();
 }
