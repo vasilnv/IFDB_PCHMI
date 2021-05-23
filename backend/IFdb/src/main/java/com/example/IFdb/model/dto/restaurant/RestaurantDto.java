@@ -1,18 +1,25 @@
 package com.example.IFdb.model.dto.restaurant;
 
+import com.example.IFdb.model.entity.Comment;
 import com.example.IFdb.model.enums.RatingType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import java.sql.Blob;
 import java.util.List;
 
 @Setter
@@ -26,7 +33,7 @@ public class RestaurantDto {
 
 
     @Column
-    private byte[] buffer;
+    private Blob buffer;
 
     @NotNull
     @Column
@@ -45,9 +52,7 @@ public class RestaurantDto {
     @Enumerated(EnumType.STRING)
     private RatingType rating;
 
-    @NotNull
-    @Column
-    private String[] comments;
+    private List<Comment> commentList;
 
     @NotNull
     @Column

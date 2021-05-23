@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -34,6 +35,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(RestaurantNotFoundException.class)
     public ResponseEntity<Object> restaurantNotFoundExcepton(RestaurantNotFoundException restaurantNotFoundException){
         return new ResponseEntity<>(restaurantNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(SQLException.class)
+    public ResponseEntity<Object> sqlException(SQLException sqlException){
+        return new ResponseEntity<>(sqlException.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @Override

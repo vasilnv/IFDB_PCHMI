@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @Validated
@@ -39,12 +41,14 @@ public class RestaurantController {
     @PostMapping("/{userId}")
     public ResponseEntity<RestaurantDto> createRestaurantPage(@PathVariable(value = "userId") Integer userId,
                                                               @RequestParam(value = "attachedfile") MultipartFile multipartFile,
-                                                              @RequestBody @Valid CreateRestaurantDto createRestaurantDto){
+                                                              @RequestParam(value = "name") String name,
+                                                              @RequestParam(value = "address") String address,
+                                                              @RequestParam(value = "description") String description,
+                                                              @RequestParam(value = "foods") String[] foods) throws IOException, SQLException {
 
-//        Restaurant newRestaurant = this.restaurantService.createRestaurantPage(userId,createRestaurantDto);
-        //this.modelMapper.map(newRestaurant,RestaurantDto.class)
-        System.out.println("name");
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        CreateRestaurantDto createRestaurantDto = new CreateRestaurantDto(name,address,description,foods);
+        Restaurant newRestaurant = this.restaurantService.createRestaurantPage(userId,multipartFile,createRestaurantDto);
+        return new ResponseEntity<>(this.modelMapper.map(newRestaurant,RestaurantDto.class),HttpStatus.CREATED);
     }
 
 //    @GetMapping("/{searchCriteria}")

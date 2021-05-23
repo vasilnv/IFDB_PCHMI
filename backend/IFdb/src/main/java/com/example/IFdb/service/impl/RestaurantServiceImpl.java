@@ -14,7 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.sql.rowset.serial.SerialBlob;
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,15 +37,18 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant createRestaurantPage(Integer userId, CreateRestaurantDto createRestaurantDto) {
+    public Restaurant createRestaurantPage(Integer userId, MultipartFile multipartFile,CreateRestaurantDto createRestaurantDto) throws IOException, SQLException {
         User user = getUserById(userId);
 
         Restaurant restaurant = new Restaurant();
         restaurant.setAddress(createRestaurantDto.getAddress());
         restaurant.setName(createRestaurantDto.getName());
-//        restaurant.setBuffer(restaurantDto.getBuffer());
+        Blob blob = new SerialBlob(multipartFile.getBytes());
+        restaurant.setBuffer(blob);
         restaurant.setDescription(createRestaurantDto.getDescription());
         restaurant.setFoods(createRestaurantDto.getFoods());
+        user.getRestaurantList().add(restaurant);
+        user.setRestaurantList(user.getRestaurantList());
 
         return this.restaurantRepository.save(restaurant);
     }
