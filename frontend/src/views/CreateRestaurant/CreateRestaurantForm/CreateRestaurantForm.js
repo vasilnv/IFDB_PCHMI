@@ -31,7 +31,10 @@ const CreateRestaurantForm = ({
 
                 const data = new FormData();
 
-                data.append('restaurantInfo', JSON.stringify({ ...rest }));
+                data.append('name', JSON.stringify(rest.name));
+                data.append('description', JSON.stringify(rest.description));
+                data.append('address', JSON.stringify(rest.address));
+                data.append('foods', JSON.stringify(rest.foods));
 
                 restaurantImage.forEach((file, i) => {
                     data.append(`attachedfile`, file);
@@ -39,7 +42,7 @@ const CreateRestaurantForm = ({
 
                 const userId = '2';
 
-                userService.createRestaurant(userId, data);
+                await userService.createRestaurant(userId, data);
             }}
         >
             {(props) =>
