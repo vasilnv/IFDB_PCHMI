@@ -95,9 +95,9 @@ public class UserController {
     }
 
     @DeleteMapping("/comments/{id}")
-    public ResponseEntity deleteRestaurantComment(@PathVariable(value="id") Integer id){
+    public ResponseEntity<Integer> deleteRestaurantComment(@PathVariable(value="id") Integer id){
         this.userService.deleteComment(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
 }

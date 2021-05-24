@@ -49,7 +49,7 @@ const RestaurantPage = ({
     }
 
     const handleRemoveComment = async (index, commentId) => {
-        await userService.removeComment(restaurantId, commentId);
+        await userService.removeComment(commentId);
         comments.splice(index, 1);
     };
 
@@ -154,11 +154,12 @@ const RestaurantPage = ({
                     <div className="content">
                         {comments &&
                             comments.map((x, index) => {
+                                console.log(x, result);
                                 return (
                                     <div className="comment-wrapper">
                                         <div className="comment">
                                             {x.comment}
-                                            {x.user_id === result._id &&
+                                            {   x.userId == result._id &&
                                                 <button className="remove-button" key={`0${index}`} onClick={() => handleRemoveComment(index, x.id)}> <XIcon /> </button>
                                             }
                                         </div>
