@@ -68,6 +68,11 @@ const RestaurantPage = ({
         setComment('');
     };
 
+    const handleUpdateRate = async (rating, category) => {
+        const data = {ratingType: category, rating, user_id: result._id, restaurant_id: restaurantId}
+        await userService.updateRate(data);
+    };
+
     console.log(restaurant, comments)
 
     return (
@@ -120,6 +125,7 @@ const RestaurantPage = ({
                                 initialRating={rates ? rates.filter(x => x.ratingType == 'ATMOSPHERE')[0]?.rating : 0}
                                 emptySymbol={<img src={Star} className="icon" />}
                                 fullSymbol={<img src={StarFill} className="icon" />}
+                                onClick={(e) => handleUpdateRate(e, 'ATMOSPHERE')}
                             />
                         </div>
                         <div className="content-rate-content">
@@ -127,6 +133,7 @@ const RestaurantPage = ({
                                 initialRating={rates ? rates.filter(x => x.ratingType == 'SERVICE')[0]?.rating : 0}
                                 emptySymbol={<img src={Star} className="icon" />}
                                 fullSymbol={<img src={StarFill} className="icon" />}
+                                onClick={(e) => handleUpdateRate(e, 'SERVICE')}
                             />
                         </div>
                         <div className="content-rate-content">
@@ -134,6 +141,7 @@ const RestaurantPage = ({
                                 initialRating={rates ? rates.filter(x => x.ratingType == 'FOOD_QUALITY')[0]?.rating : 0}
                                 emptySymbol={<img src={Star} className="icon" />}
                                 fullSymbol={<img src={StarFill} className="icon" />}
+                                onClick={(e) => handleUpdateRate(e, 'FOOD_QUALITY')}
                             />
                         </div>
                     </div>

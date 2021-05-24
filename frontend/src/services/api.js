@@ -11,5 +11,6 @@ const api = {
     restaurantComments: (restaurantId) => `/restaurants/${restaurantId}/comments`,
     users: () => `/users/all`,
     rates: (restaurantId, userId) => `/users/rate/${restaurantId}/${userId}`,
+    rate: () => `/users/rate`,
 }
 export default api;

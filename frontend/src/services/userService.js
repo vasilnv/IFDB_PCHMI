@@ -16,6 +16,7 @@ const userService = {
     addComment: async (data) => await requester(api.comment()).create(data),
     removeComment: async (commentId) => await requester(api.removeComment(commentId)).delete(),
     getRates: async (restaurantId, userId) => await requester(api.rates(restaurantId, userId)).get(),
+    updateRate: async (data) => await requester(api.rate()).create(data),
 }
 
 
