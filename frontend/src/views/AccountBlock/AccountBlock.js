@@ -41,7 +41,7 @@ const AccountBlock = ({
                 onSubmit={async (values) => {
                     const userId = 45;
                     console.log(userId, values)
-                    userService.blockAccounts(values.accounts);
+                    userService.blockAccounts({userIds: values.accounts});
                 }}
             >
                 {(props) =>
