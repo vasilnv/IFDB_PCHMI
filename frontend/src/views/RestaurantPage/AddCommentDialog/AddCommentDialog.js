@@ -41,7 +41,7 @@ const AddCommentDialog = ({
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button type="submit" onClick={(e) => handleSendComment(comment)}>Добавяне</Button>
+                <Button type="submit" onClick={(e) => handleSendComment(comment, setComment)}>Добавяне</Button>
                 <Button onClick={handleClose}>Затвори</Button>
             </Modal.Footer>
         </Modal>
