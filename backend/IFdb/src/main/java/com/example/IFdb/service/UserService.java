@@ -22,4 +22,6 @@ public interface UserService {
 
     void addComment(AddCommentDto addCommentDto);
 
+    void deleteComment(Integer commentId);
+
 }
