@@ -13,6 +13,7 @@ const userService = {
     getComments: async (restaurantId) => await requester(api.restaurantComments(restaurantId)).get(),
     getRestaurants: async () => await requester(api.restaurants()).get(),
     addComment: async (data) => await requester(api.comment()).create(data),
+    removeComment: async (restaurantId, commentId) => await requester(api.removeComment(restaurantId, commentId)).delete(),
 }
 
 
