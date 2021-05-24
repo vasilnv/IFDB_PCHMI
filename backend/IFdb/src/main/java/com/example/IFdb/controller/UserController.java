@@ -2,6 +2,7 @@ package com.example.IFdb.controller;
 
 
 import com.example.IFdb.model.dto.comment.AddCommentDto;
+import com.example.IFdb.model.dto.comment.CommentDto;
 import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.dto.restaurant.RestaurantDto;
 import com.example.IFdb.model.dto.user.BlockUserDto;
@@ -37,6 +38,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -89,6 +92,12 @@ public class UserController {
     public ResponseEntity<AddCommentDto> addComment(@Valid @RequestBody AddCommentDto addCommentDto){
         this.userService.addComment(addCommentDto);
         return new ResponseEntity<>(addCommentDto,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/comments/{id}")
+    public ResponseEntity<Integer> deleteRestaurantComment(@PathVariable(value="id") Integer id){
+        this.userService.deleteComment(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
 }

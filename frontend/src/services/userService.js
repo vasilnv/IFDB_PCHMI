@@ -14,7 +14,7 @@ const userService = {
     getRestaurants: async () => await requester(api.restaurants()).get(),
     getUsers: async () => await requester(api.users()).get(),
     addComment: async (data) => await requester(api.comment()).create(data),
-    removeComment: async (restaurantId, commentId) => await requester(api.removeComment(restaurantId, commentId)).delete(),
+    removeComment: async (commentId) => await requester(api.removeComment(commentId)).delete(),
 }
 
 

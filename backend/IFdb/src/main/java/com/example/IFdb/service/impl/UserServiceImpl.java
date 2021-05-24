@@ -106,6 +106,12 @@ public class UserServiceImpl implements UserService {
         commentRepository.save(comment);
     }
 
+    @Override
+    public void deleteComment(Integer commentId) {
+        this.commentRepository.deleteById(commentId);
+
+    }
+
     private User getUserById(Integer id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(MessageFormat.format("User with id:{0} not found", id)));
     }
@@ -113,6 +119,7 @@ public class UserServiceImpl implements UserService {
     private Restaurant getRestaurantById(Integer id) {
         return restaurantRepository.findById(id).orElseThrow(() -> new RestaurantNotFoundException(MessageFormat.format("Restaurant with id:{0} not found", id)));
     }
+
 
 
 }
