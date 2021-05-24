@@ -49,6 +49,8 @@ const RestaurantPage = ({
 
     const handleSendComment = async (comment) => {
         const newComment = await userService.addComment({comment, restaurant_id: restaurantId, user_id: result._id});
+
+        setComments([...comments, newComment]);
     };
 
     console.log(restaurant, comments)
@@ -142,7 +144,7 @@ const RestaurantPage = ({
                         </div>
                     </div>
                     <div className="content">
-                        { comments !== [] &&
+                        { comments &&
                             comments.map(x => {
                                 return (
                                     <div className="comment-wrapper">
