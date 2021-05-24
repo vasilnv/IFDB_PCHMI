@@ -56,7 +56,7 @@ const RestaurantPage = ({
     }
 
     const handleRemoveComment = async (index, commentId) => {
-        await userService.removeComment(commentId);
+        userService.removeComment(commentId);
         comments.splice(index, 1);
     };
 
@@ -122,7 +122,7 @@ const RestaurantPage = ({
                     <div className="content-rate-col content">
                         <div className="content-rate-content">
                             <Rating
-                                initialRating={rates ? rates.filter(x => x.ratingType == 'ATMOSPHERE')[rates.filter(x => x.ratingType == 'ATMOSPHERE').length]?.rating : 0}
+                                initialRating={rates ? rates.filter(x => x.ratingType == 'ATMOSPHERE')[rates.filter(x => x.ratingType == 'ATMOSPHERE').length - 1 ]?.rating : 0}
                                 emptySymbol={<img src={Star} className="icon" />}
                                 fullSymbol={<img src={StarFill} className="icon" />}
                                 onClick={(e) => handleUpdateRate(e, 'ATMOSPHERE')}
@@ -130,7 +130,7 @@ const RestaurantPage = ({
                         </div>
                         <div className="content-rate-content">
                             <Rating
-                                initialRating={rates ? rates.filter(x => x.ratingType == 'SERVICE')[rates.filter(x => x.ratingType == 'SERVICE').length]?.rating : 0}
+                                initialRating={rates ? rates.filter(x => x.ratingType == 'SERVICE')[rates.filter(x => x.ratingType == 'SERVICE').length - 1 ]?.rating : 0}
                                 emptySymbol={<img src={Star} className="icon" />}
                                 fullSymbol={<img src={StarFill} className="icon" />}
                                 onClick={(e) => handleUpdateRate(e, 'SERVICE')}
@@ -138,7 +138,7 @@ const RestaurantPage = ({
                         </div>
                         <div className="content-rate-content">
                             <Rating
-                                initialRating={rates ? rates.filter(x => x.ratingType == 'FOOD_QUALITY')[rates.filter(x => x.ratingType == 'FOOD_QUALITY').length]?.rating : 0}
+                                initialRating={rates ? rates.filter(x => x.ratingType == 'FOOD_QUALITY')[rates.filter(x => x.ratingType == 'FOOD_QUALITY').length - 1 ]?.rating : 0}
                                 emptySymbol={<img src={Star} className="icon" />}
                                 fullSymbol={<img src={StarFill} className="icon" />}
                                 onClick={(e) => handleUpdateRate(e, 'FOOD_QUALITY')}

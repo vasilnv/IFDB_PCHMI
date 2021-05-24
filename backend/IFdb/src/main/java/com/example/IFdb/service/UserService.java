@@ -22,7 +22,7 @@ public interface UserService {
 
     void blockUsers(BlockUserDto blockUserDto);
 
-    void deleteUser(DeleteUserDto deleteUserDto);
+    void deleteUser(Integer id);
 
     void addComment(AddCommentDto addCommentDto);
 
