@@ -42,10 +42,6 @@ public class Restaurant {
     @Column
     private String description;
 
-    @OneToMany
-    @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
-    private List<Rating> ratingList;
-
     @NotNull
     @Column
     private String[] foods;
@@ -53,5 +49,7 @@ public class Restaurant {
     @OneToMany(mappedBy = "restaurant")
     private List<Comment> commentsList;
 
+    @OneToMany(mappedBy = "restaurant")
+    private List<Rating> ratingsList;
 
 }
