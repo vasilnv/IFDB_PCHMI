@@ -79,6 +79,8 @@
             margin-top: 20px;
 
             .title {
+                display: flex;
+                gap: 20px;
                 color: $grey-dark;
                 font-size: 16px;
                 font-weight: 500;
