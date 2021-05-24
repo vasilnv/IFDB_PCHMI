@@ -26,7 +26,7 @@ const RestaurantPage = ({
 
     useEffect(() => {
         userService.getRestaurant(restaurantId).then(x => setRestaurants(x));
-        userService.getComments(restaurantId).then(x => setComments(Array.from(x)))
+        userService.getComments(restaurantId).then(x => setComments(x))
     }, [])
 
     const newCookies = document.cookie.split(';');
@@ -49,6 +49,8 @@ const RestaurantPage = ({
 
     const handleSendComment = async (comment) => {
         const newComment = await userService.addComment({comment, restaurant_id: restaurantId, user_id: result._id});
+
+        setComments([...comments, newComment]);
     };
 
     console.log(restaurant)
