@@ -19,6 +19,10 @@ const MyAccountForm = ({
         }
     }, {})
 
+    const handleDeleteUser = () => {
+        userService.deleteUser({id: result._id});
+    };
+
     return (
         <Formik
             initialValues={{
@@ -34,6 +38,7 @@ const MyAccountForm = ({
             {(props) =>
                 <MyAccountFormView
                     {...props}
+                    handleDeleteUser={handleDeleteUser}
                 />
             }
         </Formik>

@@ -13,5 +13,6 @@ const api = {
     rates: (restaurantId, userId) => `/users/rate/${restaurantId}/${userId}`,
     rate: () => `/users/rate`,
     credentials: () => `/users/change-credentials`,
+    deleteUser: () => `/users/delete`,
 }
 export default api;

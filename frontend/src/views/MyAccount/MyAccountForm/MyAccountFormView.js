@@ -11,6 +11,7 @@ const MyAccountFormView = ({
     setFieldValue,
     errors,
     inputFilesRef,
+    handleDeleteUser,
 }) => {
     return (
         <Form className="form-my-account" onSubmit={handleSubmit}>
@@ -72,7 +73,7 @@ const MyAccountFormView = ({
                 <ErrorMessage name="email" component="div" className="invalid-field-message" />
             </Form.Group>
             <div className="first-btn">
-                <Button variant="primary" type="button" className="delete-form-btn">
+                <Button variant="primary" type="button" className="delete-form-btn" onClick={handleDeleteUser}>
                     Изтриване на акаунт
                 </Button>
             </div>
