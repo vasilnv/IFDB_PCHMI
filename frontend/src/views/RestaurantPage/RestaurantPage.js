@@ -56,7 +56,7 @@ const RestaurantPage = ({
             <div className="restaurant-page-header">
                 <div className="left-part">
                     <h1 className="header-title"> {restaurant.name} </h1>
-                    {
+                    {restaurant?.rate &&
                         Array.from(Array(restaurant.rate).keys()).map((x, index) => {
                             return <img key={index} src={StarFill} alt="rate" />
                         })
@@ -120,7 +120,7 @@ const RestaurantPage = ({
                     <div className="title">
                         Предлагани храни:
                     </div>
-                    {
+                    {restaurant?.foods &&
                         restaurant.foods.map(x => {
                             return (
                                 <div className="food">
@@ -140,7 +140,7 @@ const RestaurantPage = ({
                         </div>
                     </div>
                     <div className="content">
-                        {
+                        { restaurant?.comments &&
                             restaurant.comments.map(x => {
                                 return (
                                     <div className="comment-wrapper">
