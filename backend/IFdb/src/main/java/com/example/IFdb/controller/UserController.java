@@ -86,9 +86,9 @@ public class UserController {
     }
 
     @PostMapping("/add-comment")
-    public ResponseEntity addComment(@Valid @RequestBody AddCommentDto addCommentDto){
+    public ResponseEntity<AddCommentDto> addComment(@Valid @RequestBody AddCommentDto addCommentDto){
         this.userService.addComment(addCommentDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(addCommentDto,HttpStatus.OK);
     }
 
 }
