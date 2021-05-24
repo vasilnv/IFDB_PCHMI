@@ -51,6 +51,8 @@ const RestaurantPage = ({
         const newComment = await userService.addComment({comment, restaurant_id: restaurantId, user_id: result._id});
 
         setComments([...comments, newComment]);
+
+        handleCloseDialog();
     };
 
     console.log(restaurant)
