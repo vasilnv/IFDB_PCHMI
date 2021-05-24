@@ -80,14 +80,13 @@ public class RestaurantController {
         return new ResponseEntity<>(modelMapper.map(restaurant,RestaurantDto.class), HttpStatus.OK);
     }
 
-    @GetMapping("{id}/getComments")
+    @GetMapping("{id}/comments")
     public ResponseEntity<List<Comment>> getRestaurantComments(@PathVariable(value = "id") Integer id){
 
         Restaurant restaurant = this.restaurantService.getRestaurantById(id);
         List<Comment> comments = restaurant.getCommentsList();
         return new ResponseEntity<>(modelMapper.map(comments,List.class), HttpStatus.OK);
     }
-
 
     @PutMapping("/rate")
     public ResponseEntity addRestaurantRating(@Valid @RequestBody RatingDto ratingDto){
