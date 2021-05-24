@@ -96,8 +96,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(DeleteUserDto deleteUserDto){
-        User user = getUserById(deleteUserDto.getId());
+    public void deleteUser(Integer id){
+        User user = getUserById(id);
         this.userRepository.delete(user);
     }
 
@@ -138,14 +138,6 @@ public class UserServiceImpl implements UserService {
 
         List<Rating> userRatings = user.getRatingsList();
         List<Rating> restaurantRatings = restaurant.getRatingsList();
-
-//        Integer avg = 0;
-//        Integer cnt = 0;
-//        for (Rating rating : restaurantRatings) {
-//            avg += rating.getRating();
-//            cnt++;
-//        }
-//        avg /= cnt;
 
         return userRatings;
     }

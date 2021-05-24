@@ -25,6 +25,10 @@ public class ChangeCredentialsDto {
 
     @NotNull
     @Column
+    private String passwordNew;
+
+    @NotNull
+    @Column
     private String email;
 
 }

@@ -86,10 +86,10 @@ public class UserController {
         return new ResponseEntity<>(blockUserDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity deleteUser(@Valid @RequestBody DeleteUserDto deleteUserDto){
-        this.userService.deleteUser(deleteUserDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Integer> deleteUser (@PathVariable(value="id") Integer id){
+        this.userService.deleteUser(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     @PostMapping("/add-comment")
