@@ -6,9 +6,11 @@ import com.example.IFdb.model.dto.comment.AddCommentDto;
 import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.dto.user.UserDto;
 import com.example.IFdb.model.entity.Comment;
+import com.example.IFdb.model.dto.rating.RatingDto;
 import com.example.IFdb.model.entity.Restaurant;
 import com.example.IFdb.model.entity.User;
 import com.example.IFdb.repository.CommentRepository;
+import com.example.IFdb.model.enums.RatingType;
 import com.example.IFdb.repository.RestaurantRepository;
 import com.example.IFdb.repository.UserRepository;
 import com.example.IFdb.service.RestaurantService;
@@ -56,12 +58,26 @@ public class RestaurantServiceImpl implements RestaurantService {
         return this.restaurantRepository.findAll();
     }
 
+//    @Override
+//    public Restaurant addRestaurantRating(RatingDto ratingDto) {
+//        Restaurant restaurant = getRestaurantById(ratingDto.getId());
+//
+//        RatingType ratingType = ratingDto.getRatingType();
+//        ratingType.setRating(ratingDto.getRating());
+//        restaurant.setRatingType(ratingType);
+//        return restaurantRepository.save(restaurant);
+//    }
+
     private Byte[] toObjects(byte[] bytesPrim) {
 
         Byte[] bytes = new Byte[bytesPrim.length];
         int i = 0;
         for (byte b : bytesPrim) bytes[i++] = b;
         return bytes;
+    }
+
+    private Restaurant getRestaurantById(Integer id) {
+        return restaurantRepository.findById(id).orElseThrow(() -> new RestaurantNotFoundException(MessageFormat.format("Restaurant with id:{0} not found", id)));
     }
 
     @Override
@@ -75,10 +91,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private User getUserById(Integer id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(MessageFormat.format("User with id:{0} not found", id)));
-    }
-
-    private Restaurant getRestaurantById(Integer id) {
-        return restaurantRepository.findById(id).orElseThrow(() -> new RestaurantNotFoundException(MessageFormat.format("Restaurant with id:{0} not found", id)));
     }
 
 }

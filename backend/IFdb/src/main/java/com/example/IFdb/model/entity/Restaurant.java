@@ -40,9 +40,9 @@ public class Restaurant {
     @Column
     private String description;
 
-    @Column
-    @Enumerated(EnumType.STRING)
-    private RatingType rating;
+    @OneToMany
+    @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
+    private List<Rating> ratingList;
 
     @NotNull
     @Column

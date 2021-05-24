@@ -38,7 +38,10 @@ const Main = ({
                     <Navbar.Brand className="navbar-logo-image" href="/">
                         <Image src={Logo} fluid />
                     </Navbar.Brand>
-                    <Form inline>
+                    <Form inline onSubmit={(e) => {
+                        e.preventDefault()
+                        history.push(`/search/${e.target.lastChild.value}`);
+                    }}>
                         <Form.Control type="text" placeholder="Search" className="main-layout-search" />
                     </Form>
                 </Navbar.Collapse>

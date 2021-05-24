@@ -31,9 +31,9 @@ const CreateRestaurantForm = ({
 
                 const data = new FormData();
 
-                data.append('name', JSON.stringify(rest.name));
-                data.append('description', JSON.stringify(rest.description));
-                data.append('address', JSON.stringify(rest.address));
+                data.append('name', rest.name);
+                data.append('description', rest.description);
+                data.append('address', rest.address);
                 data.append('foods', rest.foods);
 
                 restaurantImage.forEach((file, i) => {

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 import StarFill from 'assets/star-fill.svg';
+import userService from 'services/userService';
 
 import './SearchPage.scss';
-
-const restaurants = [{ name: 'Batkoviq', stars: 4 }, { name: 'Putkava Torta', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Dedoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 }, { name: 'Batkoviq', stars: 4 },];
 
 const SearchPage = ({
 
@@ -13,8 +13,20 @@ const SearchPage = ({
     const { search } = useParams();
     const [results, setResult] = useState([]);
 
-    const filterOutput = () => {
+    let history = useHistory();
+    useState(() => {
+        userService.getRestaurants().then(x => setResult(x));
+    }, [search])
 
+    const filterOutput = (data) => {
+        const result = data.filter(x => {
+            const isWithThisName = x.name === search;
+            const haveFood = x.foods.includes(search);
+
+            return isWithThisName || haveFood;
+        })
+
+        return result;
     };
 
     return (
@@ -25,16 +37,17 @@ const SearchPage = ({
             </div>
             <div className="content-wrapper">
                 {
-                    restaurants.map((x, index) => {
+                    filterOutput(results).map((x, index) => {
+
                         return (
-                            <div key={index} className="restaurant-wrapper" onClick={() => alert(x.name)}>
+                            <div key={x.id} className="restaurant-wrapper" onClick={() => history.push(`/restaurant/${x.id}`)}>
                                 <div>
                                     {x.name}
                                 </div>
                                 <div>
                                     {
-                                        Array.from(Array(x.stars).keys()).map(x => {
-                                            return <img src={StarFill} alt="restaurant" />
+                                        Array.from(Array(4).keys()).map((x, innerIndex) => {
+                                            return <img key={innerIndex} src={StarFill} alt="restaurant" />
                                         })
                                     }
                                 </div>
