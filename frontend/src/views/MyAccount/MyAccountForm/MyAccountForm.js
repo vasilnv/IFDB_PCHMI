@@ -20,7 +20,7 @@ const MyAccountForm = ({
     }, {})
 
     const handleDeleteUser = () => {
-        userService.deleteUser({id: result._id});
+        userService.deleteUser(result._id);
     };
 
     return (
