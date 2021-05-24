@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Rating from 'react-rating';
 import StarFill from 'assets/star-fill.svg';
 import Star from 'assets/star.svg';
 import RestaurantImg from 'assets/restaurant.jpg';
-import { restaurant } from './RestaurantPageConstants';
 import PlusCircleIcon from 'assets/plus-circle.svg';
 import AddCommentDialog from './AddCommentDialog';
 import userService from 'services/userService';
@@ -21,7 +20,12 @@ const RestaurantPage = ({
 
     const { restaurantId } = useParams();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [restaurant, setRestaurants] = useState({});
     const { currentUser } = useAuth();
+
+    useEffect(() => {
+        userService.getRestaurant(restaurantId).then(x => setRestaurants(x));
+    }, [])
 
     const newCookies = document.cookie.split(';');
 
@@ -43,8 +47,9 @@ const RestaurantPage = ({
 
     const handleSendComment = async (comment) => {
         const newComment = await userService.addComment({comment, restaurant_id: restaurantId, user_id: result._id});
-        console.log(newComment)
     };
+
+    console.log(restaurant)
 
     return (
         <div className="restaurant-page-wrapper">
