@@ -1,6 +1,7 @@
 package com.example.IFdb.controller;
 
 
+import com.example.IFdb.model.dto.comment.AddCommentDto;
 import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.dto.restaurant.RestaurantDto;
 import com.example.IFdb.model.dto.user.BlockUserDto;
@@ -10,8 +11,10 @@ import com.example.IFdb.model.dto.user.LoginUserDto;
 import com.example.IFdb.model.dto.user.RegisterUserDto;
 import com.example.IFdb.model.dto.user.UserDto;
 import com.example.IFdb.model.dto.user.UserOnlyRestaurantDto;
+import com.example.IFdb.model.entity.Comment;
 import com.example.IFdb.model.entity.Restaurant;
 import com.example.IFdb.model.entity.User;
+import com.example.IFdb.service.RestaurantService;
 import com.example.IFdb.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +48,7 @@ public class UserController {
     private ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, RestaurantService restaurantService){
         this.userService = userService;
     }
 
@@ -64,7 +67,7 @@ public class UserController {
         return new ResponseEntity<>(this.modelMapper.map(newUser,UserDto.class), HttpStatus.OK);
     }
 
-    @PutMapping("/changeCredentials")
+    @PutMapping("/change-credentials")
     public ResponseEntity<UserDto> changeUserCredentials(@Valid @RequestBody ChangeCredentialsDto changeCredentialsDto){
         User newUser = this.userService.changeCredentials(changeCredentialsDto);
         return new ResponseEntity<>(this.modelMapper.map(newUser,UserDto.class), HttpStatus.OK);
@@ -79,6 +82,12 @@ public class UserController {
     @DeleteMapping("/delete")
     public ResponseEntity deleteUser(@Valid @RequestBody DeleteUserDto deleteUserDto){
         this.userService.deleteUser(deleteUserDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/add-comment")
+    public ResponseEntity addComment(@Valid @RequestBody AddCommentDto addCommentDto){
+        this.userService.addComment(addCommentDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

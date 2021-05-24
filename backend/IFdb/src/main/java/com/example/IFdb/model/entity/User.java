@@ -49,12 +49,12 @@ public class User {
     @NotNull
     private boolean isBlocked;
 
-//    @OneToMany
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    private List<Comment> commentList;
-
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<Restaurant> restaurantList;
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment> commentList;
+
 
 }

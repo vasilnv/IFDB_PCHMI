@@ -1,6 +1,8 @@
 package com.example.IFdb.service;
 
+import com.example.IFdb.model.dto.comment.AddCommentDto;
 import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
+import com.example.IFdb.model.entity.Comment;
 import com.example.IFdb.model.dto.rating.RatingDto;
 import com.example.IFdb.model.entity.Restaurant;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,5 +17,5 @@ public interface RestaurantService {
 
     List<Restaurant> getAllRestaurants();
 
-//    Restaurant addRestaurantRating(RatingDto ratingDto);
+    Restaurant addRestaurantRating(RatingDto ratingDto);
 }

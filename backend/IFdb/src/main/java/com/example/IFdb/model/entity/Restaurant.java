@@ -1,16 +1,11 @@
 package com.example.IFdb.model.entity;
 
-import com.example.IFdb.model.enums.RatingType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import java.sql.Blob;
 import java.util.List;
 
 
@@ -52,13 +46,12 @@ public class Restaurant {
     @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
     private List<Rating> ratingList;
 
-
-//    @OneToMany
-//    @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
-//    private List<Comment> commentList;
-
     @NotNull
     @Column
     private String[] foods;
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<Comment> commentsList;
+
 
 }
