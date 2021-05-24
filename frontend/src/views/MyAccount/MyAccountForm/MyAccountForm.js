@@ -25,7 +25,7 @@ const MyAccountForm = ({
                 username: result.username || '',
                 password: '',
                 passwordNew: '',
-                email: '',
+                email: result.email || '',
             }}
             onSubmit={async (values) => {
                 userService.changeCredentials({...values, id: result._id});
