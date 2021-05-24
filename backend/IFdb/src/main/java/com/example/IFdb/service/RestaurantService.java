@@ -19,5 +19,7 @@ public interface RestaurantService {
 
     Restaurant addRestaurantRating(RatingDto ratingDto);
 
+    Restaurant getRestaurantById(Integer id);
+
     Restaurant editRestaurantPage(Integer userId,MultipartFile multipartFile,CreateRestaurantDto createRestaurantDto);
 }

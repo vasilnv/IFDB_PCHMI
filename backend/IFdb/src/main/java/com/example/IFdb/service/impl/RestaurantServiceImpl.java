@@ -69,6 +69,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
+    public Restaurant getRestaurantById(Integer id) {
+        return getNewRestaurantById(id);
+    }
+
+    @Override
     public Restaurant editRestaurantPage(Integer userId, MultipartFile multipartFile, CreateRestaurantDto createRestaurantDto) {
         return null;
     }
@@ -86,7 +91,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return bytes;
     }
 
-    private Restaurant getRestaurantById(Integer id) {
+    private Restaurant getNewRestaurantById(Integer id) {
         return restaurantRepository.findById(id).orElseThrow(() -> new RestaurantNotFoundException(MessageFormat.format("Restaurant with id:{0} not found", id)));
     }
 

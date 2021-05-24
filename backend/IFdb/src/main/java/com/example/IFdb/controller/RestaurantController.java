@@ -72,6 +72,14 @@ public class RestaurantController {
         return new ResponseEntity<>(restaurantsDto, HttpStatus.OK);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<RestaurantDto> findRestaurantById(@PathVariable(value = "id") Integer id){
+
+        Restaurant restaurant = this.restaurantService.getRestaurantById(id);
+        return new ResponseEntity<>(modelMapper.map(restaurant,RestaurantDto.class), HttpStatus.OK);
+    }
+
+
     @PutMapping("/rate")
     public ResponseEntity addRestaurantRating(@Valid @RequestBody RatingDto ratingDto){
 
