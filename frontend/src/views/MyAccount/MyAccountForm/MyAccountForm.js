@@ -20,7 +20,7 @@ const MyAccountForm = ({
     }, {})
 
     const handleDeleteUser = () => {
-        userService.deleteUser(result._id);
+        userService.blockAccounts({userIds: [result._id]});
     };
 
     return (
