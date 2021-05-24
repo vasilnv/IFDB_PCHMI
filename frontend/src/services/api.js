@@ -9,6 +9,6 @@ const api = {
     comment: () => `/users/add-comment`,
     removeComment: (comment) => `/users/comments/${comment}`,
     restaurantComments: (restaurantId) => `/restaurants/${restaurantId}/comments`,
-    users: () => `users/all`,
+    users: () => `/users/all`,
 }
 export default api;
