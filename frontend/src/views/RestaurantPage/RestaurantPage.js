@@ -41,8 +41,9 @@ const RestaurantPage = ({
         setIsDialogOpen(false);
     }
 
-    const handleSendComment = (comment) => {
-        userService.addComment({comment, restaurant_id: restaurantId, user_id: result._id});
+    const handleSendComment = async (comment) => {
+        const newComment = await userService.addComment({comment, restaurant_id: restaurantId, user_id: result._id});
+        console.log(newComment)
     };
 
     return (
