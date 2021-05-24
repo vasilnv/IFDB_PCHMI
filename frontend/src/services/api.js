@@ -7,5 +7,6 @@ const api = {
     restaurants: () => `/restaurants`,
     blockAccounts: () => `/users/block-accounts`,
     comment: () => `/users/add-comment`,
+    restaurantComments: (restaurantId) => `/restaurants/${restaurantId}/comments`
 }
 export default api;

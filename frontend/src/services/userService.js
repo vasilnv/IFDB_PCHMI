@@ -10,6 +10,7 @@ const userService = {
     login: async (username, password) => await requester(api.loginUser(username, password)).get(),
     blockAccounts: async (userId, data) => await requester(api.blockAccounts()).update(data),
     getRestaurant: async (restaurantId) => await requester(api.restaurant(restaurantId)).get(),
+    getComments: async (restaurantId) => await requester(api.comments(restaurantId)).get(),
     getRestaurants: async () => await requester(api.restaurants()).get(),
     addComment: async (data) => await requester(api.comment()).create(data),
 }

@@ -21,10 +21,12 @@ const RestaurantPage = ({
     const { restaurantId } = useParams();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [restaurant, setRestaurants] = useState({});
+    const [comments, setComments] = useState([]);
     const { currentUser } = useAuth();
 
     useEffect(() => {
         userService.getRestaurant(restaurantId).then(x => setRestaurants(x));
+        userService.getComments(restaurantId).then(x => setComments(x))
     }, [])
 
     const newCookies = document.cookie.split(';');
@@ -140,8 +142,8 @@ const RestaurantPage = ({
                         </div>
                     </div>
                     <div className="content">
-                        { restaurant?.comments &&
-                            restaurant.comments.map(x => {
+                        { comments !== [] &&
+                            comments.map(x => {
                                 return (
                                     <div className="comment-wrapper">
                                         <div className="comment">
