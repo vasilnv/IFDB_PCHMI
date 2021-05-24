@@ -117,21 +117,21 @@ const RestaurantPage = ({
                     <div className="content-rate-col content">
                         <div className="content-rate-content">
                             <Rating
-                                initialRating={rates.filter(x => x.ratingType == 'ATMOSPHERE')[0].rating}
+                                initialRating={rates ? rates.filter(x => x.ratingType == 'ATMOSPHERE')[0]?.rating : 0}
                                 emptySymbol={<img src={Star} className="icon" />}
                                 fullSymbol={<img src={StarFill} className="icon" />}
                             />
                         </div>
                         <div className="content-rate-content">
                             <Rating
-                                initialRating={rates.filter(x => x.ratingType == 'SERVICE')[0].rating}
+                                initialRating={rates ? rates.filter(x => x.ratingType == 'SERVICE')[0]?.rating : 0}
                                 emptySymbol={<img src={Star} className="icon" />}
                                 fullSymbol={<img src={StarFill} className="icon" />}
                             />
                         </div>
                         <div className="content-rate-content">
                             <Rating
-                                initialRating={rates.filter(x => x.ratingType == 'FOOD_QUALITY')[0].rating}
+                                initialRating={rates ? rates.filter(x => x.ratingType == 'FOOD_QUALITY')[0]?.rating : 0}
                                 emptySymbol={<img src={Star} className="icon" />}
                                 fullSymbol={<img src={StarFill} className="icon" />}
                             />
