@@ -21,9 +21,9 @@ const AccountBlock = ({
 
     const addAccount = (value, setFieldValue, values) => {
         const accountSet = new Set(values.accounts);
-        accountSet.add(value);
         const user = users.find(x => x.id == value);
         console.log(user)
+        accountSet.add(user);
         setFieldValue('accounts', Array.from(accountSet));
     };
 
@@ -41,9 +41,8 @@ const AccountBlock = ({
                     accounts: [],
                 }}
                 onSubmit={async (values) => {
-                    const userId = 45;
-                    console.log(userId, values)
-                    userService.blockAccounts({userIds: values.accounts});
+                    const userIds = values.accounts.map(x => x.id)
+                    userService.blockAccounts({userIds: userIds});
                 }}
             >
                 {(props) =>
@@ -65,7 +64,7 @@ const AccountBlock = ({
                                             props.values.accounts.map((account, index) => (
                                                 <div key={`02${index}`} className="account-field">
                                                     <div key={index}>
-                                                        {account}
+                                                        {account.username}
                                                     </div>
                                                     <button className="remove-button" key={`0${index}`} onClick={() => removeAccount(index, props.values)}> <XIcon /> </button>
                                                 </div>
