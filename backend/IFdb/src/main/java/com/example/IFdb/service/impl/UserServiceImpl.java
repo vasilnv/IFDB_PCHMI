@@ -4,6 +4,7 @@ import com.example.IFdb.exception.RestaurantNotFoundException;
 import com.example.IFdb.exception.UserAlreadyBlockedException;
 import com.example.IFdb.exception.UserNotFoundException;
 import com.example.IFdb.model.dto.comment.AddCommentDto;
+import com.example.IFdb.model.dto.rating.RatingDto;
 import com.example.IFdb.model.dto.user.BlockUserDto;
 import com.example.IFdb.model.dto.user.ChangeCredentialsDto;
 import com.example.IFdb.model.dto.user.DeleteUserDto;
@@ -11,10 +12,12 @@ import com.example.IFdb.model.dto.user.LoginUserDto;
 import com.example.IFdb.model.dto.user.RegisterUserDto;
 import com.example.IFdb.model.dto.user.UserDto;
 import com.example.IFdb.model.entity.Comment;
+import com.example.IFdb.model.entity.Rating;
 import com.example.IFdb.model.entity.Restaurant;
 import com.example.IFdb.model.entity.User;
 import com.example.IFdb.model.enums.UserType;
 import com.example.IFdb.repository.CommentRepository;
+import com.example.IFdb.repository.RatingRepository;
 import com.example.IFdb.repository.RestaurantRepository;
 import com.example.IFdb.repository.UserRepository;
 import com.example.IFdb.service.UserService;
@@ -32,12 +35,15 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private CommentRepository commentRepository;
     private RestaurantRepository restaurantRepository;
+    private RatingRepository ratingRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, CommentRepository commentRepository,RestaurantRepository restaurantRepository) {
+    public UserServiceImpl(UserRepository userRepository, CommentRepository commentRepository,
+                           RestaurantRepository restaurantRepository, RatingRepository ratingRepository) {
         this.userRepository = userRepository;
         this.commentRepository = commentRepository;
         this.restaurantRepository = restaurantRepository;
+        this.ratingRepository = ratingRepository;
     }
 
 
@@ -105,6 +111,45 @@ public class UserServiceImpl implements UserService {
         comment.setComment(addCommentDto.getComment());
         commentRepository.save(comment);
     }
+
+    @Override
+    public Rating addRating(RatingDto ratingDto) {
+        User user = getUserById(ratingDto.getUser_id());
+        Restaurant restaurant = getRestaurantById(ratingDto.getRestaurant_id());
+        Integer ratingId = ratingDto.getId();
+        Rating rating = new Rating();
+        if (ratingId != null) {
+            rating = ratingRepository.getById(ratingDto.getId());
+            ratingRepository.delete(rating);
+        }
+
+        rating.setUser(user);
+        rating.setRestaurant(restaurant);
+        rating.setRating(ratingDto.getRating());
+        rating.setRatingType(ratingDto.getRatingType());
+        ratingRepository.save(rating);
+        return rating;
+    }
+
+    @Override
+    public List<Rating> getUserRating(Integer userId, Integer restaurantId) {
+        User user = userRepository.getById(userId);
+        Restaurant restaurant = restaurantRepository.getById(restaurantId);
+
+        List<Rating> userRatings = user.getRatingsList();
+        List<Rating> restaurantRatings = restaurant.getRatingsList();
+
+//        Integer avg = 0;
+//        Integer cnt = 0;
+//        for (Rating rating : restaurantRatings) {
+//            avg += rating.getRating();
+//            cnt++;
+//        }
+//        avg /= cnt;
+
+        return userRatings;
+    }
+
 
     @Override
     public void deleteComment(Integer commentId) {

@@ -3,10 +3,13 @@ package com.example.IFdb.controller;
 
 import com.example.IFdb.model.dto.comment.AddCommentDto;
 import com.example.IFdb.model.dto.comment.CommentDto;
+import com.example.IFdb.model.dto.rating.RatingDto;
+import com.example.IFdb.model.dto.rating.UserRatingsDto;
 import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.dto.restaurant.RestaurantDto;
 import com.example.IFdb.model.dto.user.*;
 import com.example.IFdb.model.entity.Comment;
+import com.example.IFdb.model.entity.Rating;
 import com.example.IFdb.model.entity.Restaurant;
 import com.example.IFdb.model.entity.User;
 import com.example.IFdb.service.RestaurantService;
@@ -99,6 +102,20 @@ public class UserController {
     public ResponseEntity<Integer> deleteRestaurantComment(@PathVariable(value="id") Integer id){
         this.userService.deleteComment(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @PostMapping("/rate")
+    public ResponseEntity<RatingDto> rate(@Valid @RequestBody RatingDto ratingDto){
+        Rating rating = this.userService.addRating(ratingDto);
+        return new ResponseEntity<>(this.modelMapper.map(rating, RatingDto.class),HttpStatus.OK);
+    }
+
+    @GetMapping("/rate/{restaurantId}/{userId}")
+    public ResponseEntity<List<UserRatingsDto>> getRatings(@PathVariable(value="restaurantId") Integer restaurantId,
+                                          @PathVariable(value="userId") Integer userId){
+        List<Rating> ratings = this.userService.getUserRating(userId, restaurantId);
+        List<UserRatingsDto> ratingsDto = Arrays.asList(modelMapper.map(ratings, UserRatingsDto[].class));
+        return new ResponseEntity<>(ratingsDto,HttpStatus.OK);
     }
 
 }
