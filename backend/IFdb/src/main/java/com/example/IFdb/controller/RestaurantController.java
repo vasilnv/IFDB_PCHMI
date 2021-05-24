@@ -3,6 +3,7 @@ package com.example.IFdb.controller;
 import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.dto.rating.RatingDto;
 import com.example.IFdb.model.dto.restaurant.RestaurantDto;
+import com.example.IFdb.model.entity.Comment;
 import com.example.IFdb.model.entity.Restaurant;
 import com.example.IFdb.service.RestaurantService;
 import org.modelmapper.ModelMapper;
@@ -77,6 +78,14 @@ public class RestaurantController {
 
         Restaurant restaurant = this.restaurantService.getRestaurantById(id);
         return new ResponseEntity<>(modelMapper.map(restaurant,RestaurantDto.class), HttpStatus.OK);
+    }
+
+    @GetMapping("{id}/getComments")
+    public ResponseEntity<List<Comment>> getRestaurantComments(@PathVariable(value = "id") Integer id){
+
+        Restaurant restaurant = this.restaurantService.getRestaurantById(id);
+        List<Comment> comments = restaurant.getCommentsList();
+        return new ResponseEntity<>(modelMapper.map(comments,List.class), HttpStatus.OK);
     }
 
 
