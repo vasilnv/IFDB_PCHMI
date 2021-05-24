@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { ReactComponent as XIcon } from 'assets/x.svg';
 import Rating from 'react-rating';
 import StarFill from 'assets/star-fill.svg';
 import Star from 'assets/star.svg';
@@ -33,7 +34,7 @@ const RestaurantPage = ({
 
     let result = {};
     newCookies.map((x) => {
-        if(x) {
+        if (x) {
             const data = x.split('=');
             result[data[0].trim()] = data[1].trim();
         }
@@ -47,8 +48,13 @@ const RestaurantPage = ({
         setIsDialogOpen(false);
     }
 
+    const handleRemoveComment = async (index, commentId) => {
+        await userService.removeComment(restaurantId, commentId);
+        comments.splice(index, 1);
+    };
+
     const handleSendComment = async (comment, setComment) => {
-        const newComment = await userService.addComment({comment, restaurant_id: restaurantId, user_id: result._id});
+        const newComment = await userService.addComment({ comment, restaurant_id: restaurantId, user_id: result._id });
 
         setComments([...comments, newComment]);
         handleCloseDialog();
@@ -146,12 +152,15 @@ const RestaurantPage = ({
                         </div>
                     </div>
                     <div className="content">
-                        { comments &&
-                            comments.map(x => {
+                        {comments &&
+                            comments.map((x, index) => {
                                 return (
                                     <div className="comment-wrapper">
                                         <div className="comment">
                                             {x.comment}
+                                            {x.user_id === result._id &&
+                                                <button className="remove-button" key={`0${index}`} onClick={() => handleRemoveComment(index, x.id)}> <XIcon /> </button>
+                                            }
                                         </div>
                                         <Button >
                                             Блокиране
@@ -171,7 +180,7 @@ const RestaurantPage = ({
                 handleSendComment={handleSendComment}
             />
 
-        </div>
+        </div >
     )
 };
 
