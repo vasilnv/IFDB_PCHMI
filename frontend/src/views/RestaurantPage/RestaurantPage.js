@@ -24,14 +24,12 @@ const RestaurantPage = ({
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [restaurant, setRestaurants] = useState({});
     const [comments, setComments] = useState([]);
+    const [rates, setRates] = useState([]);
     const { currentUser } = useAuth();
 
     let history = useHistory();
 
-    useEffect(() => {
-        userService.getRestaurant(restaurantId).then(x => setRestaurants(x));
-        userService.getComments(restaurantId).then(x => setComments(x))
-    }, [])
+
 
     const newCookies = document.cookie.split(';');
 
@@ -42,6 +40,12 @@ const RestaurantPage = ({
             result[data[0].trim()] = data[1].trim();
         }
     }, {})
+
+    useEffect(() => {
+        userService.getRestaurant(restaurantId).then(x => setRestaurants(x));
+        userService.getComments(restaurantId).then(x => setComments(x));
+        userService.getRates(restaurantId, result._id).then(x => setRates(x))
+    }, [])
 
     const handleOpenDialog = () => {
         setIsDialogOpen(true);
@@ -113,18 +117,21 @@ const RestaurantPage = ({
                     <div className="content-rate-col content">
                         <div className="content-rate-content">
                             <Rating
+                                initialRating={rates.filter(x => x.ratingType == 'ATMOSPHERE')[0].rating}
                                 emptySymbol={<img src={Star} className="icon" />}
                                 fullSymbol={<img src={StarFill} className="icon" />}
                             />
                         </div>
                         <div className="content-rate-content">
                             <Rating
+                                initialRating={rates.filter(x => x.ratingType == 'SERVICE')[0].rating}
                                 emptySymbol={<img src={Star} className="icon" />}
                                 fullSymbol={<img src={StarFill} className="icon" />}
                             />
                         </div>
                         <div className="content-rate-content">
                             <Rating
+                                initialRating={rates.filter(x => x.ratingType == 'FOOD_QUALITY')[0].rating}
                                 emptySymbol={<img src={Star} className="icon" />}
                                 fullSymbol={<img src={StarFill} className="icon" />}
                             />
@@ -162,7 +169,7 @@ const RestaurantPage = ({
                                     <div className="comment-wrapper">
                                         <div className="comment">
                                             {x.comment}
-                                            { x.userId == result._id &&
+                                            {x.userId == result._id &&
                                                 <button className="remove-button" key={`0${index}`} onClick={() => handleRemoveComment(index, x.id)}> <XIcon /> </button>
                                             }
                                         </div>
