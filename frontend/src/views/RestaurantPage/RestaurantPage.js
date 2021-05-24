@@ -51,7 +51,7 @@ const RestaurantPage = ({
         const newComment = await userService.addComment({comment, restaurant_id: restaurantId, user_id: result._id});
     };
 
-    console.log(restaurant)
+    console.log(restaurant, comments)
 
     return (
         <div className="restaurant-page-wrapper">
@@ -147,7 +147,7 @@ const RestaurantPage = ({
                                 return (
                                     <div className="comment-wrapper">
                                         <div className="comment">
-                                            {x}
+                                            {x.comment}
                                         </div>
                                         <Button >
                                             Блокиране

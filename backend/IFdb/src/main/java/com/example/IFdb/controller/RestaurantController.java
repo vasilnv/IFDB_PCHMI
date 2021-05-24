@@ -1,5 +1,6 @@
 package com.example.IFdb.controller;
 
+import com.example.IFdb.model.dto.comment.CommentDto;
 import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.dto.rating.RatingDto;
 import com.example.IFdb.model.dto.restaurant.RestaurantDto;
@@ -81,11 +82,12 @@ public class RestaurantController {
     }
 
     @GetMapping("{id}/comments")
-    public ResponseEntity<List<Comment>> getRestaurantComments(@PathVariable(value = "id") Integer id){
+    public ResponseEntity<List<CommentDto>> getRestaurantComments(@PathVariable(value = "id") Integer id){
 
         Restaurant restaurant = this.restaurantService.getRestaurantById(id);
         List<Comment> comments = restaurant.getCommentsList();
-        return new ResponseEntity<>(modelMapper.map(comments,List.class), HttpStatus.OK);
+        List<CommentDto> commentsDto = Arrays.asList(modelMapper.map(comments, CommentDto[].class));
+        return new ResponseEntity<>(commentsDto, HttpStatus.OK);
     }
 
     @PutMapping("/rate")
