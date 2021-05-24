@@ -51,6 +51,19 @@ public class RestaurantController {
         return new ResponseEntity<>(this.modelMapper.map(newRestaurant,RestaurantDto.class),HttpStatus.CREATED);
     }
 
+    @PutMapping("/{userId}")
+    public ResponseEntity<RestaurantDto> editRestaurantPage(@PathVariable(value = "userId") Integer userId,
+                                                              @RequestParam(value = "attachedfile") MultipartFile multipartFile,
+                                                              @RequestParam(value = "name") String name,
+                                                              @RequestParam(value = "address") String address,
+                                                              @RequestParam(value = "description") String description,
+                                                              @RequestParam(value = "foods") String[] foods) throws IOException, SQLException {
+
+        CreateRestaurantDto createRestaurantDto = new CreateRestaurantDto(name,address,description,foods);
+        Restaurant newRestaurant = this.restaurantService.editRestaurantPage(userId,multipartFile,createRestaurantDto);
+        return new ResponseEntity<>(this.modelMapper.map(newRestaurant,RestaurantDto.class),HttpStatus.CREATED);
+    }
+
     @GetMapping
     public ResponseEntity<List<RestaurantDto>> findRestaurants(){
 
