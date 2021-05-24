@@ -21,9 +21,7 @@ const AccountBlock = ({
 
     const addAccount = (value, setFieldValue, values) => {
         const accountSet = new Set(values.accounts);
-
         accountSet.add(value);
-
         setFieldValue('accounts', Array.from(accountSet));
     };
 
