@@ -28,8 +28,7 @@ const MyAccountForm = ({
                 email: '',
             }}
             onSubmit={async (values) => {
-
-                console.log(values);
+                userService.changeCredentials(values);
             }}
         >
             {(props) =>

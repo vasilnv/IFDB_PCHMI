@@ -12,5 +12,6 @@ const api = {
     users: () => `/users/all`,
     rates: (restaurantId, userId) => `/users/rate/${restaurantId}/${userId}`,
     rate: () => `/users/rate`,
+    credentials: () => `/users/change-credentials`,
 }
 export default api;
