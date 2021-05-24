@@ -26,7 +26,7 @@ const RestaurantPage = ({
 
     useEffect(() => {
         userService.getRestaurant(restaurantId).then(x => setRestaurants(x));
-        userService.getComments(restaurantId).then(x => setComments(x))
+        userService.getComments(restaurantId).then(x => setComments(Array.from(x)))
     }, [])
 
     const newCookies = document.cookie.split(';');
@@ -142,12 +142,12 @@ const RestaurantPage = ({
                         </div>
                     </div>
                     <div className="content">
-                        { comments !== [] &&
+                        { comments &&
                             comments.map(x => {
                                 return (
                                     <div className="comment-wrapper">
                                         <div className="comment">
-                                            {x}
+                                            {x.comment}
                                         </div>
                                         <Button >
                                             Блокиране
