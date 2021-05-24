@@ -23,6 +23,16 @@ const RestaurantPage = ({
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const { currentUser } = useAuth();
 
+    const newCookies = document.cookie.split(';');
+
+    let result = {};
+    newCookies.map((x) => {
+        if(x) {
+            const data = x.split('=');
+            result[data[0].trim()] = data[1].trim();
+        }
+    }, {})
+
     const handleOpenDialog = () => {
         setIsDialogOpen(true);
     };
@@ -32,7 +42,7 @@ const RestaurantPage = ({
     }
 
     const handleSendComment = (comment) => {
-        userService.addComment({comment, restaurant_id: restaurantId, user_id: currentUser._id});
+        userService.addComment({comment, restaurant_id: restaurantId, user_id: result._id});
     };
 
     return (
