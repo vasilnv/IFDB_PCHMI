@@ -48,8 +48,6 @@ public class RestaurantDto {
     @Column
     private String description;
 
-//    private List<Comment> commentList;
-
     @NotNull
     @Column
     private String[] foods;

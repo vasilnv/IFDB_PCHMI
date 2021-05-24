@@ -55,7 +55,7 @@ const RestaurantPage = ({
         handleCloseDialog();
     };
 
-    console.log(restaurant)
+    console.log(restaurant, comments)
 
     return (
         <div className="restaurant-page-wrapper">
