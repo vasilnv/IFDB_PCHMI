@@ -1,6 +1,8 @@
 package com.example.IFdb.service;
 
+import com.example.IFdb.model.dto.comment.AddCommentDto;
 import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
+import com.example.IFdb.model.entity.Comment;
 import com.example.IFdb.model.entity.Restaurant;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,4 +15,6 @@ public interface RestaurantService {
     Restaurant createRestaurantPage(Integer userId, MultipartFile multipartFile, CreateRestaurantDto createRestaurantDto) throws IOException, SQLException;
 
     List<Restaurant> getAllRestaurants();
+
+    void addComment(AddCommentDto addCommentDto);
 }

@@ -1,6 +1,7 @@
 package com.example.IFdb.controller;
 
 
+import com.example.IFdb.model.dto.comment.AddCommentDto;
 import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.dto.restaurant.RestaurantDto;
 import com.example.IFdb.model.dto.user.BlockUserDto;
@@ -12,6 +13,7 @@ import com.example.IFdb.model.dto.user.UserDto;
 import com.example.IFdb.model.dto.user.UserOnlyRestaurantDto;
 import com.example.IFdb.model.entity.Restaurant;
 import com.example.IFdb.model.entity.User;
+import com.example.IFdb.service.RestaurantService;
 import com.example.IFdb.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +44,13 @@ import java.util.List;
 @Validated
 public class UserController {
     private UserService userService;
+//    private RestaurantService restaurantService;
     private ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, RestaurantService restaurantService){
         this.userService = userService;
+//        this.restaurantService = restaurantService;
     }
 
 
@@ -79,6 +83,13 @@ public class UserController {
     @DeleteMapping("/delete")
     public ResponseEntity deleteUser(@Valid @RequestBody DeleteUserDto deleteUserDto){
         this.userService.deleteUser(deleteUserDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/addComment")
+    public ResponseEntity addComment(@Valid @RequestBody AddCommentDto addCommentDto){
+        this.userService.addComment(addCommentDto);
+//        this.restaurantService.addComment(addCommentDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
