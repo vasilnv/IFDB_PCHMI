@@ -58,15 +58,20 @@ public class RestaurantServiceImpl implements RestaurantService {
         return this.restaurantRepository.findAll();
     }
 
-//    @Override
-//    public Restaurant addRestaurantRating(RatingDto ratingDto) {
-//        Restaurant restaurant = getRestaurantById(ratingDto.getId());
-//
-//        RatingType ratingType = ratingDto.getRatingType();
-//        ratingType.setRating(ratingDto.getRating());
+    @Override
+    public Restaurant addRestaurantRating(RatingDto ratingDto) {
+        Restaurant restaurant = getRestaurantById(ratingDto.getId());
+
+        RatingType ratingType = ratingDto.getRatingType();
+        ratingType.setRating(ratingDto.getRating());
 //        restaurant.setRatingType(ratingType);
-//        return restaurantRepository.save(restaurant);
-//    }
+        return restaurantRepository.save(restaurant);
+    }
+
+    private User getUserById(Integer id) {
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(MessageFormat.format("User with id:{0} not found", id)));
+    }
+
 
     private Byte[] toObjects(byte[] bytesPrim) {
 
@@ -78,19 +83,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private Restaurant getRestaurantById(Integer id) {
         return restaurantRepository.findById(id).orElseThrow(() -> new RestaurantNotFoundException(MessageFormat.format("Restaurant with id:{0} not found", id)));
-    }
-
-    @Override
-    public void addComment(AddCommentDto addCommentDto) {
-        Restaurant restaurant = getRestaurantById(addCommentDto.getRestaurant_id());
-        Comment comment = new Comment();
-        comment.setComment(addCommentDto.getComment());
-        restaurant.getCommentsList().add(comment);
-        restaurantRepository.save(restaurant);
-    }
-
-    private User getUserById(Integer id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(MessageFormat.format("User with id:{0} not found", id)));
     }
 
 }

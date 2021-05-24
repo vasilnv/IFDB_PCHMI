@@ -1,5 +1,6 @@
 package com.example.IFdb.service.impl;
 
+import com.example.IFdb.exception.RestaurantNotFoundException;
 import com.example.IFdb.exception.UserAlreadyBlockedException;
 import com.example.IFdb.exception.UserNotFoundException;
 import com.example.IFdb.model.dto.comment.AddCommentDto;
@@ -10,9 +11,11 @@ import com.example.IFdb.model.dto.user.LoginUserDto;
 import com.example.IFdb.model.dto.user.RegisterUserDto;
 import com.example.IFdb.model.dto.user.UserDto;
 import com.example.IFdb.model.entity.Comment;
+import com.example.IFdb.model.entity.Restaurant;
 import com.example.IFdb.model.entity.User;
 import com.example.IFdb.model.enums.UserType;
 import com.example.IFdb.repository.CommentRepository;
+import com.example.IFdb.repository.RestaurantRepository;
 import com.example.IFdb.repository.UserRepository;
 import com.example.IFdb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +31,13 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private CommentRepository commentRepository;
+    private RestaurantRepository restaurantRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, CommentRepository commentRepository) {
+    public UserServiceImpl(UserRepository userRepository, CommentRepository commentRepository,RestaurantRepository restaurantRepository) {
         this.userRepository = userRepository;
         this.commentRepository = commentRepository;
+        this.restaurantRepository = restaurantRepository;
     }
 
 
@@ -93,22 +98,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addComment(AddCommentDto addCommentDto) {
         User user = getUserById(addCommentDto.getUser_id());
+        Restaurant restaurant = getRestaurantById(addCommentDto.getRestaurant_id());
         Comment comment = new Comment();
+        comment.setRestaurant(restaurant);
+        comment.setUser(user);
         comment.setComment(addCommentDto.getComment());
-        List<Comment> newComments = new ArrayList<>();
-        for (Comment c : user.getCommentList()) {
-            newComments.add(c);
-        }
-        newComments.add(comment);
-        user.setCommentList(newComments);
-        userRepository.save(user);
-//        commentRepository.save(comment);
+        commentRepository.save(comment);
     }
 
     private User getUserById(Integer id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(MessageFormat.format("User with id:{0} not found", id)));
     }
 
+    private Restaurant getRestaurantById(Integer id) {
+        return restaurantRepository.findById(id).orElseThrow(() -> new RestaurantNotFoundException(MessageFormat.format("Restaurant with id:{0} not found", id)));
+    }
 
 
 }

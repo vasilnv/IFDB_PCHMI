@@ -1,17 +1,19 @@
 package com.example.IFdb.model.entity;
 
-import com.example.IFdb.model.enums.RatingType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import java.sql.Blob;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity(name = "restaurants")
@@ -47,17 +49,8 @@ public class Restaurant {
     @NotNull
     @Column
     private String[] foods;
-//
-//    @ManyToMany(cascade = { CascadeType.ALL })
-//    @JoinTable(
-//            name = "comments",
-//            joinColumns = { @JoinColumn(name = "restaurantId") },
-//            inverseJoinColumns = { @JoinColumn(name = "userId") }
-//    )
-//    Set<User> users = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "restaurant")
     private List<Comment> commentsList;
 
 

@@ -17,7 +17,5 @@ public interface RestaurantService {
 
     List<Restaurant> getAllRestaurants();
 
-    void addComment(AddCommentDto addCommentDto);
-
-//    Restaurant addRestaurantRating(RatingDto ratingDto);
+    Restaurant addRestaurantRating(RatingDto ratingDto);
 }
