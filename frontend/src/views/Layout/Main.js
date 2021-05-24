@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
 //import { logout } from '../../utils/authFunctions';
+import { USER_TYPE } from 'constants/env';
 import Logo from '../../assets/logo.png';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -25,7 +26,7 @@ const Main = ({
 
     let result = {};
     newCookies.map((x) => {
-        if(x) {
+        if (x) {
             const data = x.split('=');
             result[data[0].trim()] = data[1].trim();
         }
@@ -48,12 +49,17 @@ const Main = ({
                 <Nav className="mr-auto">
                     {result._id ?
                         <div className="profile">
-                        <Nav.Item>
-                            <Nav.Link href="/my-account">Моят Профил</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link onClick={() => {document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); }); history.push("/authorization");}}>Изход</Nav.Link>
-                        </Nav.Item>
+                            {(result.role == USER_TYPE.ADMIN || result.role == USER_TYPE.RESTAURANT_OWNER) &&
+                                <Nav.Item>
+                                    <Nav.Link href="/create-restaurant">Създаване на ресторант</Nav.Link>
+                                </Nav.Item>
+                            }
+                            <Nav.Item>
+                                <Nav.Link href="/my-account">Моят Профил</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link onClick={() => { document.cookie.split(";").forEach(function (c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); }); history.push("/authorization"); }}>Изход</Nav.Link>
+                            </Nav.Item>
                         </div>
                         :
                         <Nav.Item>
