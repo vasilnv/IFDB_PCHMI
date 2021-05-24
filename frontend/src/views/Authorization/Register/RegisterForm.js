@@ -20,7 +20,6 @@ const RegisterForm = ({
         <Formik
             initialValues={initialValues}
             onSubmit={async (values) => {
-                console.log(54, values, isLogin)
                 isLogin ? handleLogin(values) : handleRegister(values);
             }}
         >
