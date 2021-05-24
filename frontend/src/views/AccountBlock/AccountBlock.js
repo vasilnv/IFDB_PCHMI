@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Formik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
@@ -12,6 +12,12 @@ import './AccountBlock.scss';
 const AccountBlock = ({
 
 }) => {
+
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        userService.getUsers().then(x => setUsers(x));
+    }, [])
 
     const addAccount = (value, setFieldValue, values) => {
         const accountSet = new Set(values.accounts);
@@ -37,7 +43,7 @@ const AccountBlock = ({
                 onSubmit={async (values) => {
                     const userId = 45;
                     console.log(userId, values)
-                    //userService.blockAccounts(userId, values);
+                    userService.blockAccounts(values.accounts);
                 }}
             >
                 {(props) =>
@@ -45,11 +51,11 @@ const AccountBlock = ({
                         <Form.Group controlId="formAccounts">
                             <Form.Label>Избери потребители за блокиране</Form.Label>
                             <Form.Control as="select" onChange={(e) => addAccount(e.target.options[e.target.selectedIndex].value, props.setFieldValue, props.values)}>
-                                <option value="1">Batko</option>
-                                <option value="5">Niko</option>
-                                <option value="2">Drebniq</option>
-                                <option value="3">Ludiq</option>
-                                <option value="1 2">Putkavatorta</option>
+                                {
+                                    users.map((x, index) => {
+                                        return <option key={index} value={`${x.id}`}>{x.username}</option>
+                                    })
+                                }
                             </Form.Control>
                             <FieldArray
                                 name="accounts"

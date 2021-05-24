@@ -8,10 +8,11 @@ const userService = {
     createRestaurant: (userId, data) => requester(api.restaurant(userId)).uploadFile(data),
     register: async (userData) => await requester(api.registerUser()).create(userData),
     login: async (username, password) => await requester(api.loginUser(username, password)).get(),
-    blockAccounts: async (userId, data) => await requester(api.blockAccounts()).update(data),
+    blockAccounts: async (data) => await requester(api.blockAccounts()).update(data),
     getRestaurant: async (restaurantId) => await requester(api.restaurant(restaurantId)).get(),
     getComments: async (restaurantId) => await requester(api.restaurantComments(restaurantId)).get(),
     getRestaurants: async () => await requester(api.restaurants()).get(),
+    getUsers: async () => await requester(api.users()).get(),
     addComment: async (data) => await requester(api.comment()).create(data),
     removeComment: async (restaurantId, commentId) => await requester(api.removeComment(restaurantId, commentId)).delete(),
 }

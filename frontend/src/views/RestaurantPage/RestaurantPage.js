@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 import { ReactComponent as XIcon } from 'assets/x.svg';
 import Rating from 'react-rating';
@@ -11,7 +12,7 @@ import AddCommentDialog from './AddCommentDialog';
 import userService from 'services/userService';
 import { useAuth } from '../../contexts/AuthContext';
 
-
+import { USER_TYPE } from 'constants/env';
 import './RestaurantPage.scss';
 import { Button } from 'react-bootstrap';
 
@@ -24,6 +25,8 @@ const RestaurantPage = ({
     const [restaurant, setRestaurants] = useState({});
     const [comments, setComments] = useState([]);
     const { currentUser } = useAuth();
+
+    let history = useHistory();
 
     useEffect(() => {
         userService.getRestaurant(restaurantId).then(x => setRestaurants(x));
@@ -158,13 +161,15 @@ const RestaurantPage = ({
                                     <div className="comment-wrapper">
                                         <div className="comment">
                                             {x.comment}
-                                            {x.user_id === result._id &&
+                                            {x.user_id == result._id &&
                                                 <button className="remove-button" key={`0${index}`} onClick={() => handleRemoveComment(index, x.id)}> <XIcon /> </button>
                                             }
                                         </div>
-                                        <Button >
-                                            Блокиране
-                                        </Button>
+                                        {(result.role == USER_TYPE.ADMIN || result.role == USER_TYPE.MODERATOR) &&
+                                            <Button onClick={() => history.push('/block')}>
+                                                Блокиране
+                                            </ Button>
+                                        }
                                     </div>
                                 )
                             })
