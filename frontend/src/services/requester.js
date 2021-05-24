@@ -22,15 +22,13 @@ const initRequest = async (contentType, method, body) => {
 const initBaseRequest = initRequest.bind(null, "application/json");
 
 const responseHandler = async res => {
-
-    console.log(res);
     if (!res.ok) {
         if (res.status === 401) {
             let response = await res.json();
 
             if(response.error?.details !== 'Specify id token for this request!') {
                 //logout();
-                console.log('logout')
+                document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); }); 
             }
 
             throw response;

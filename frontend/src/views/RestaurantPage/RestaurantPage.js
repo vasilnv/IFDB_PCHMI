@@ -73,8 +73,6 @@ const RestaurantPage = ({
         await userService.updateRate(data);
     };
 
-    console.log(restaurant, comments)
-
     return (
         <div className="restaurant-page-wrapper">
             <div className="restaurant-page-header">
@@ -172,7 +170,6 @@ const RestaurantPage = ({
                     <div className="content">
                         {comments &&
                             comments.map((x, index) => {
-                                console.log(x, result);
                                 return (
                                     <div className="comment-wrapper">
                                         <div className="comment">

@@ -22,7 +22,6 @@ const AccountBlock = ({
     const addAccount = (value, setFieldValue, values) => {
         const accountSet = new Set(values.accounts);
         const user = users.find(x => x.id == value);
-        console.log(user)
         accountSet.add(user);
         setFieldValue('accounts', Array.from(accountSet));
     };
