@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
+import Rating from 'react-rating';
 import StarFill from 'assets/star-fill.svg';
+import Star from 'assets/star.svg';
 import RestaurantImg from 'assets/restaurant.jpg';
 import { restaurant } from './RestaurantPageConstants';
+import PlusCircleIcon from 'assets/plus-circle.svg';
+import AddCommentDialog from './AddCommentDialog';
+import userService from 'services/userService';
+import { useAuth } from '../../contexts/AuthContext';
+
 
 import './RestaurantPage.scss';
 import { Button } from 'react-bootstrap';
@@ -10,6 +18,22 @@ import { Button } from 'react-bootstrap';
 const RestaurantPage = ({
 
 }) => {
+
+    const { restaurantId } = useParams();
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const { currentUser } = useAuth();
+
+    const handleOpenDialog = () => {
+        setIsDialogOpen(true);
+    };
+
+    const handleCloseDialog = () => {
+        setIsDialogOpen(false);
+    }
+
+    const handleSendComment = (comment) => {
+        userService.addComment({comment, restaurant_id: restaurantId, user_id: currentUser._id});
+    };
 
     return (
         <div className="restaurant-page-wrapper">
@@ -57,25 +81,22 @@ const RestaurantPage = ({
                     </div>
                     <div className="content-rate-col content">
                         <div className="content-rate-content">
-                            {
-                                Array.from(Array(restaurant.atmosphere).keys()).map((x, index) => {
-                                    return <img key={index} src={StarFill} alt="rate" />
-                                })
-                            }
+                            <Rating
+                                emptySymbol={<img src={Star} className="icon" />}
+                                fullSymbol={<img src={StarFill} className="icon" />}
+                            />
                         </div>
                         <div className="content-rate-content">
-                            {
-                                Array.from(Array(restaurant.serve).keys()).map((x, index) => {
-                                    return <img key={index} src={StarFill} alt="rate" />
-                                })
-                            }
+                            <Rating
+                                emptySymbol={<img src={Star} className="icon" />}
+                                fullSymbol={<img src={StarFill} className="icon" />}
+                            />
                         </div>
                         <div className="content-rate-content">
-                            {
-                                Array.from(Array(restaurant.quality).keys()).map((x, index) => {
-                                    return <img key={index} src={StarFill} alt="rate" />
-                                })
-                            }
+                            <Rating
+                                emptySymbol={<img src={Star} className="icon" />}
+                                fullSymbol={<img src={StarFill} className="icon" />}
+                            />
                         </div>
                     </div>
                 </div>
@@ -95,7 +116,12 @@ const RestaurantPage = ({
                 </div>
                 <div className="comment-section">
                     <div className="title">
-                        Коментари
+                        <div className="">
+                            Коментари
+                        </div>
+                        <div>
+                            <img onClick={handleOpenDialog} className="add-comment-image" src={PlusCircleIcon} />
+                        </div>
                     </div>
                     <div className="content">
                         {
@@ -115,6 +141,14 @@ const RestaurantPage = ({
                     </div>
                 </div>
             </div>
+
+            <AddCommentDialog
+                handleClose={handleCloseDialog}
+                isOpen={isDialogOpen}
+                restaurantId={restaurantId}
+                handleSendComment={handleSendComment}
+            />
+
         </div>
     )
 };
