@@ -112,6 +112,10 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    public List<User> getAllUsers() {
+        return this.userRepository.findAll();
+    }
+
     private User getUserById(Integer id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(MessageFormat.format("User with id:{0} not found", id)));
     }

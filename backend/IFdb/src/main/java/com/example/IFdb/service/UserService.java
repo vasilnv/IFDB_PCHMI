@@ -9,6 +9,8 @@ import com.example.IFdb.model.dto.user.RegisterUserDto;
 import com.example.IFdb.model.entity.Comment;
 import com.example.IFdb.model.entity.User;
 
+import java.util.List;
+
 public interface UserService {
     User registerUser(RegisterUserDto user);
 
@@ -24,4 +26,5 @@ public interface UserService {
 
     void deleteComment(Integer commentId);
 
+    List<User> getAllUsers();
 }

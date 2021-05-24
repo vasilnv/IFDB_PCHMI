@@ -5,13 +5,7 @@ import com.example.IFdb.model.dto.comment.AddCommentDto;
 import com.example.IFdb.model.dto.comment.CommentDto;
 import com.example.IFdb.model.dto.restaurant.CreateRestaurantDto;
 import com.example.IFdb.model.dto.restaurant.RestaurantDto;
-import com.example.IFdb.model.dto.user.BlockUserDto;
-import com.example.IFdb.model.dto.user.ChangeCredentialsDto;
-import com.example.IFdb.model.dto.user.DeleteUserDto;
-import com.example.IFdb.model.dto.user.LoginUserDto;
-import com.example.IFdb.model.dto.user.RegisterUserDto;
-import com.example.IFdb.model.dto.user.UserDto;
-import com.example.IFdb.model.dto.user.UserOnlyRestaurantDto;
+import com.example.IFdb.model.dto.user.*;
 import com.example.IFdb.model.entity.Comment;
 import com.example.IFdb.model.entity.Restaurant;
 import com.example.IFdb.model.entity.User;
@@ -70,16 +64,23 @@ public class UserController {
         return new ResponseEntity<>(this.modelMapper.map(newUser,UserDto.class), HttpStatus.OK);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<UserGetAllDto>> getAllUsers(){
+        List<User> users = this.userService.getAllUsers();
+        List<UserGetAllDto> usersDto = Arrays.asList(modelMapper.map(users, UserGetAllDto[].class));
+        return new ResponseEntity<>(usersDto, HttpStatus.OK);
+    }
+
     @PutMapping("/change-credentials")
     public ResponseEntity<UserDto> changeUserCredentials(@Valid @RequestBody ChangeCredentialsDto changeCredentialsDto){
         User newUser = this.userService.changeCredentials(changeCredentialsDto);
         return new ResponseEntity<>(this.modelMapper.map(newUser,UserDto.class), HttpStatus.OK);
     }
 
-    @PatchMapping("/block")
-    public ResponseEntity blockUsers(@Valid @RequestBody BlockUserDto blockUserDto){
+    @PutMapping("/block")
+    public ResponseEntity<BlockUserDto> blockUsers(@Valid @RequestBody BlockUserDto blockUserDto){
         this.userService.blockUsers(blockUserDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(blockUserDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")

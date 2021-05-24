@@ -52,7 +52,7 @@ const Main = ({
                             <Nav.Link href="/my-account">Моят Профил</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={() => {document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); }); history.push("/authorization");}}>Izhod</Nav.Link>
+                            <Nav.Link onClick={() => {document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); }); history.push("/authorization");}}>Изход</Nav.Link>
                         </Nav.Item>
                         </div>
                         :
