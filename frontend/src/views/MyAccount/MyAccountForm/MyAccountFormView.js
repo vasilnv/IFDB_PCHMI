@@ -18,6 +18,7 @@ const MyAccountFormView = ({
                 <Form.Label>Потребителско име</Form.Label>
                 <Form.Control
                     type="text"
+                    disabled
                     className="input-field username"
                     placeholder="Потребителско име"
                     name="username"
