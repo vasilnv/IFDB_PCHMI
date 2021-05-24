@@ -18,4 +18,6 @@ public interface RestaurantService {
     List<Restaurant> getAllRestaurants();
 
     Restaurant addRestaurantRating(RatingDto ratingDto);
+
+    Restaurant editRestaurantPage(Integer userId,MultipartFile multipartFile,CreateRestaurantDto createRestaurantDto);
 }
