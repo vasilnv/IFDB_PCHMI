@@ -9,10 +9,20 @@ const MyAccountForm = ({
 
 }) => {
 
+    const newCookies = document.cookie.split(';');
+
+    let result = {};
+    newCookies.map((x) => {
+        if(x) {
+            const data = x.split('=');
+            result[data[0].trim()] = data[1].trim();
+        }
+    }, {})
+
     return (
         <Formik
             initialValues={{
-                username: '',
+                username: result.username || '',
                 password: '',
                 passwordNew: '',
                 email: '',
