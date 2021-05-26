@@ -40,7 +40,17 @@ const CreateRestaurantForm = ({
                     data.append(`attachedfile`, file);
                 });
 
-                const userId = '2';
+                const newCookies = document.cookie.split(';');
+
+                			    let result = {};
+                			    newCookies.map((x) => {
+                			        if (x) {
+                			            const data = x.split('=');
+                			            result[data[0].trim()] = data[1].trim();
+                			        }
+                			    }, {})
+
+                                const userId = result._id;
 
                 await userService.createRestaurant(userId, data);
             }}
