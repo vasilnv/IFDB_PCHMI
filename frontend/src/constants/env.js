@@ -1,4 +1,4 @@
-export const HOST = "http://localhost:8080"
+export const HOST = "http://95.111.75.178:8080"
 
 export const USER_TYPE = {
     GUEST: 'GUEST', 
